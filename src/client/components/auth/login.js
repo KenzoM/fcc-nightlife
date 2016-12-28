@@ -17,33 +17,7 @@ class Login extends Component {
     const { handleSubmit, submitting } = this.props;
 
     return(
-      <main className="login container">
-        <div className="row">
-          <div className="col s12 form-title">
-            <h3><i className="fa fa-sign-in"></i> Login </h3>
-          </div>
-        </div>
-        <div className="row">
-          <form onSubmit={handleSubmit(this.onSubmit)} className="col s12 m10">
-            <div className="row">
-              <div className="input-field col s12">
-                <Field name="email" label="Enter your Email" component={renderField} type="text"/>
-              </div>
-              <div className="input-field col s12">
-                <Field name="password" label="Enter a Password" component={renderField} type="password"/>
-              </div>
-              <div className="col input-field s12">
-                <button className="btn waves-effect waves-light" type="submit">Submit
-                  <i className="fa fa-paper-plane-o"></i>
-                </button>
-                <Link to="/" className="btn waves-effect waves-light cancel-btn">Cancel
-                  <i className="fa fa-times"></i>
-                </Link>
-              </div>
-            </div>
-          </form>
-        </div>
-      </main>
+      <div>Form</div>
     )
   }
 }

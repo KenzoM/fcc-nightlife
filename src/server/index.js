@@ -6,7 +6,9 @@ const port = process.env.PORT || 1234;
 const bodyParser = require('body-parser');
 const router = require('./router');
 const mongoose = require('mongoose');
-const db =  process.env.MONGODB_URI || "mongodb://localhost:voteapp/voteapp";
+
+//MAKE SURE TO HAVE MONGOD and YOUR DB SETUP!!
+const db =  process.env.MONGODB_URI || "mongodb://localhost:whatever/whatever";
 
 const config = require('../../webpack.config');
 const webpack = require('webpack');
@@ -19,16 +21,7 @@ mongoose.connect(db);
 
 app.use(cors()) //CORS middleware on express side
 
-app.use('/index.html', express.static(path.join(__dirname, '../../index.html')))
-app.use('/dist/bundle.js/', express.static(path.resolve(__dirname, '../../dist/bundle.js')))
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: config.output.publicPath
-}));
-//
-app.use(require('webpack-hot-middleware')(compiler, {
-  path: '/__webpack_hmr',
-}));
+¸
 //App Setup
 app.use(morgan('combined'));
 

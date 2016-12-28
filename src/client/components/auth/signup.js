@@ -16,48 +16,7 @@ class Signup extends Component {
   render(){
     const { handleSubmit, submitting } = this.props;
     return(
-      <main className="login container">
-        <div className="row">
-          <div className="col s12 form-title">
-            <h3><i className="fa fa-address-card"></i> Sign-up </h3>
-          </div>
-        </div>
-        <div className="row">
-          <form onSubmit={handleSubmit(this.onSubmit)} className="col s12 m10">
-            <div className="row">
-              <div className="input-field col s12">
-                <Field name="userName" label="Enter a Username" component={renderField} type="text"/>
-              </div>
-              <div className="input-field col s12">
-                <Field name="email" label="Enter your Email" component={renderField} type="text"/>
-              </div>
-              <div className="input-field col s12">
-                <Field name="password" label="Enter a Password" component={renderField} type="password"/>
-              </div>
-              <div className="input-field col s12">
-                <Field name="passwordConfirm" label="Confirm Password" component={renderField} type="password"/>
-              </div>
-              <div className="col input-field s12">
-                <button className="btn waves-effect waves-light" type="submit">Submit
-                  <i className="fa fa-paper-plane-o"></i>
-                </button>
-                <Link to="/" className="btn waves-effect waves-light cancel-btn">Cancel
-                  <i className="fa fa-times"></i>
-                </Link>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className="row">
-          <div className="col input-field s12">
-            This app only requires a valid email and uses JWT Tokens (no cookies...yay!)
-            <br></br>
-            If you do not want to use your private email, no problem!
-            <br></br>
-            You can use <a href="http://www.throwawaymail.com/">disposable email!</a> Just make sure you remember your password ;-)
-          </div>
-        </div>
-      </main>
+      <div>Form2</div>
     )
   }
 }
