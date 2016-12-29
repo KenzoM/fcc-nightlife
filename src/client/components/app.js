@@ -10,7 +10,11 @@ export default class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <MyAwesomeReactComponent />
+        <div>
+          <NavBar />
+          <h1>Some Content Here</h1>
+          <Footer />
+        </div>
       </MuiThemeProvider>
     )
   }
