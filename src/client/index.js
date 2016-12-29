@@ -11,6 +11,10 @@ import App from './components/app';
 import Home from './containers/home';
 
 
+import injectTapEventPlugin from "react-tap-event-plugin";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 import reducers from './reducers/';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -23,6 +27,9 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 // if(token) {
 //   store.dispatch( {type: AUTH_USER} );
 // }
+
+injectTapEventPlugin();
+
 
 ReactDOM.render(
   <Provider store={store}>
