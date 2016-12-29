@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../containers/navbar';
+import Title from './Title';
+import Home from '../containers/home'
 import Footer from './footer';
 import '../stylesheets/style.scss';
 
@@ -12,8 +14,8 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div>
           <NavBar />
-          <h1>Some Content Here</h1>
-          <Footer />
+          <Title />
+          <Home />
         </div>
       </MuiThemeProvider>
     )
