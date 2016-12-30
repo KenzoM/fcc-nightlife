@@ -10,7 +10,7 @@ import RequireAuth from './components/auth/require_auth';
 import App from './components/app';
 import Home from './containers/home';
 
-
+//This is for material-ui
 import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
