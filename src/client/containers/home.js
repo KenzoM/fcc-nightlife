@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import * as actions from '../actions/';
 import MenuItem from 'material-ui/MenuItem'
 import { RadioButton } from 'material-ui/RadioButton'
 import {
@@ -22,6 +24,7 @@ class Home extends Component {
     console.log(this.props,'this is MY props')
     console.log(props)
     console.log(this.props.submitting)
+    this.props.kenzo()
   }
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props
@@ -42,4 +45,4 @@ Home = reduxForm({
   form: 'myForm'
 })(Home)
 
-export default Home
+export default Home = connect(null, actions)(Home)
