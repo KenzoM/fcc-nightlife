@@ -3,7 +3,7 @@ const ROOT_URL = 'http://localhost:1234'
 
 import { GET_YELP } from './types';
 
-export function kenzo(){
+export function getYelp(){
   const request = axios.get(`${ROOT_URL}/yelp`);
   return (dispatch) => {
     request.then( ({data}) =>{
