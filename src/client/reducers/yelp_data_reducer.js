@@ -1,12 +1,12 @@
 import { GET_YELP } from  '../actions/types';
 
-const INITIAL = { yelpData: [] }
+const INITIAL = { data: [] }
 
 export default function(state = INITIAL, action){
   switch (action.type){
-    case GET_YELP: 
+    case GET_YELP:
       const { payload } = action
-      return {...state, yelpData: payload.businesses}
+      return {...state, data: payload.businesses}
   }
   return state;
 }
