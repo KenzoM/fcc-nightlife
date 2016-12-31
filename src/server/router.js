@@ -25,10 +25,11 @@ const requireSignIn = passport.authenticate('local', { session: false });
 
 module.exports = function(app){
 
-  app.get('/yelp', function(req, res){
+  app.get('/yelp/:city', function(req, res){
+    let city = req.params.city;
     yelp.search({
       term: 'clubs',
-      location: 'Weston',
+      location: city,
       category_filter: 'bars'
      })
     .then(function (data) {
