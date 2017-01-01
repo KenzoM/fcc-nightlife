@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, formValueSelector } from 'redux-form'
 import * as actions from '../actions/';
 import LoadingCircle from '../components/LoadingCircle'
 import YelpCard from '../components/YelpCard'
@@ -11,21 +11,23 @@ import {
   RadioButtonGroup,
   SelectField,
   TextField,
-  Toggle
+  Toggle,
+  Slider
 } from 'redux-form-material-ui'
 
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = {submitted: false}
+    this.state = {distanceSlider: 0}
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(props){
-    this.setState( {submitted: true} )
+    console.log(props)
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props
     this.props.getYelp(city)
   }
+
   renderCards({name, display_phone, location, image_url, snippet_text, id, url}){
     let address = location.address[0];
     return(
@@ -48,10 +50,19 @@ class Home extends Component {
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field name="city" component={TextField} hintText="Enter Your City"/>
-            <div>
-              <button type="submit" disabled={yelpData.isFetching}>Submit</button>
-              <button type="button" disabled={pristine || submitting} onClick={reset}>Clear</button>
-            </div>
+          <Field
+            name="distance"
+            component={Slider}
+            min={1}
+            max={25}
+            format={null}
+            defaultValue={10}
+            step={1}
+           />
+          <div>
+            <button type="submit" disabled={yelpData.isFetching}>Submit</button>
+            <button type="button" disabled={pristine || yelpData.isFetching} onClick={reset}>Clear</button>
+          </div>
         </form>
         <div className="my-container">
           {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
