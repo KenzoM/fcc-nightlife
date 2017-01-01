@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import * as actions from '../actions/';
+import LoadingCircle from '../components/LoadingCircle'
 import YelpCard from '../components/YelpCard'
 import MenuItem from 'material-ui/MenuItem'
 import { RadioButton } from 'material-ui/RadioButton'
@@ -42,6 +43,7 @@ class Home extends Component {
 
   render() {
     const { handleSubmit, pristine, reset, submitting, yelpData } = this.props;
+    //isFetching helps sync correctly to load loader-image while fetching data from Yelp
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -52,7 +54,7 @@ class Home extends Component {
             </div>
         </form>
         <div className="my-container">
-          {yelpData.data.map(this.renderCards)}
+          {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
         </div>
       </div>
 
