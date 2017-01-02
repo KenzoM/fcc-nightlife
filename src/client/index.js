@@ -9,7 +9,8 @@ import RequireAuth from './components/auth/require_auth';
 
 import App from './components/app';
 import About from './components/About';
-import Login from './components/Login';
+import Login from './components/auth/login';
+import Signup from './components/auth/signup';
 import Home from './containers/home';
 
 //This is for material-ui
@@ -39,6 +40,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
+        <Route path="signup" component={Signup} />
         <Route path="about" component={About} />
       </Route>
     </Router>

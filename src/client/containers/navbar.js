@@ -29,10 +29,11 @@ class AppBarExampleComposition extends Component {
       //React-Router and Material-UI
       <div>
         <AppBar showMenuIconButton={false} style={styles.appBar} >
-          <Tabs style={styles.tabs}>
+          <Tabs style={styles.tabs} initialSelectedIndex={1}>
             <Tab label='Home' containerElement={<Link to="/" />} />
             <Tab label='About' containerElement={<Link to="/about" />} />
             <Tab label='Login' containerElement={<Link to="/login" />}/>
+            <Tab label='Signup' containerElement={<Link to="/signup" />}/>
           </Tabs>
         </AppBar>
       </div>

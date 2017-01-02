@@ -11,12 +11,21 @@ class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
   onSubmit(props){
-    this.props.signupUser(props)
+    console.log(props)
+    // this.props.signupUser(props)
   }
   render(){
     const { handleSubmit, submitting } = this.props;
     return(
-      <div>Form2</div>
+      <div className="form-test">
+        <form onSubmit={handleSubmit(this.onSubmit)}>
+          <Field name="userName" label="Enter a Username" component={renderField} type="text"/>
+          <Field name="email" label="Enter your Email" component={renderField} type="text"/>
+          <Field name="password" label="Enter a Password" component={renderField} type="password"/>
+          <Field name="passwordConfirm" label="Confirm Password" component={renderField} type="password"/>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     )
   }
 }
