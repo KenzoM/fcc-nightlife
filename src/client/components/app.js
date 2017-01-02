@@ -13,8 +13,7 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div>
           <NavBar />
-          <Title />
-          <Home />
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     )

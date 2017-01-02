@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import * as actions from '../actions/';
+import { Link } from 'react-router';
 import LoadingCircle from '../components/LoadingCircle'
 import YelpCard from '../components/YelpCard'
 import MenuItem from 'material-ui/MenuItem'
@@ -50,15 +51,6 @@ class Home extends Component {
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field name="city" component={TextField} hintText="Enter Your City"/>
-          <Field
-            name="distance"
-            component={Slider}
-            min={1}
-            max={25}
-            format={null}
-            defaultValue={10}
-            step={1}
-           />
           <div>
             <button type="submit" disabled={yelpData.isFetching}>Submit</button>
             <button type="button" disabled={pristine || yelpData.isFetching} onClick={reset}>Clear</button>
@@ -68,7 +60,6 @@ class Home extends Component {
           {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
         </div>
       </div>
-
     )
   }
 }
@@ -85,3 +76,13 @@ function mapStateToProps(state){
 }
 
 export default Home = connect(mapStateToProps, actions)(Home)
+
+// <Field
+//   name="distance"
+//   component={Slider}
+//   min={1}
+//   max={25}
+//   format={null}
+//   defaultValue={10}
+//   step={1}
+//  />

@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import RequireAuth from './components/auth/require_auth';
 
 import App from './components/app';
+import About from './components/About';
+import Login from './components/Login';
 import Home from './containers/home';
 
 //This is for material-ui
@@ -36,6 +38,8 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
+        <Route path="login" component={Login} />
+        <Route path="about" component={About} />
       </Route>
     </Router>
   </Provider>
