@@ -1,4 +1,4 @@
-// const User = require('../models/User.model');
+const User = require('../models/User.model');
 const jwt = require('jwt-simple');
 const secret = process.env.SECRET || require('../config').secret;
 
@@ -14,6 +14,7 @@ exports.signin = function(req, res, next){
 }
 
 exports.signup = function(req, res, next){
+  console.log(req.body)
   const userName = req.body.userName
   const email = req.body.email;
   const password = req.body.password;
@@ -44,5 +45,11 @@ exports.signup = function(req, res, next){
       res.json({token: tokenForUser(user), userName: userName })
     })
   })
+}
 
+exports.get = function(req, res, next){
+  // const userName = req.body.userName
+  // const email = req.body.email;
+  // const password = req.body.password;
+  res.json({message: 'this is test'})
 }

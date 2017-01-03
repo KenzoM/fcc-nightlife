@@ -13,6 +13,8 @@ import Login from './components/auth/login';
 import Signup from './components/auth/signup';
 import Home from './containers/home';
 
+import { AUTH_USER } from './actions/types'
+
 //This is for material-ui
 import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -25,11 +27,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
 //This is for JWT applications, if needed
-// const token = localStorage.getItem('token');
-//
-// if(token) {
-//   store.dispatch( {type: AUTH_USER} );
-// }
+const token = localStorage.getItem('token');
+
+if(token) {
+  store.dispatch( {type: AUTH_USER} );
+}
 
 injectTapEventPlugin();
 

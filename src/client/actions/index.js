@@ -23,11 +23,13 @@ export function getYelp(city){
 }
 
 export function signupUser( {userName, email, password}){
+  console.log(userName, email, password)
   let timeDelay = 4000;
   return function(dispatch){
     axios.post(`${ROOT_URL}/signup`, { userName, email, password})
       .then(response =>{
         dispatch({type: AUTH_USER, payload: response.data.userName})
+        console.log(response, 'this IS RESPONSE')
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userName', response.data.userName);
         browserHistory.push('/')

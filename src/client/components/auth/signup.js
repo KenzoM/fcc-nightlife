@@ -11,8 +11,8 @@ class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
   onSubmit(props){
-    console.log(props)
-    // this.props.signupUser(props)
+    // console.log(props)
+    this.props.signupUser(props)
   }
   render(){
     const { handleSubmit, submitting } = this.props;
