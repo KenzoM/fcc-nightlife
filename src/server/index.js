@@ -8,7 +8,7 @@ const router = require('./router');
 const mongoose = require('mongoose');
 
 //MAKE SURE TO HAVE MONGOD and YOUR DB SETUP!!
-const db =  process.env.MONGODB_URI || "mongodb://localhost:whatever/whatever";
+const db =  process.env.MONGODB_URI || "mongodb://localhost:nightapp/nightapp";
 
 const config = require('../../webpack.config');
 const webpack = require('webpack');
