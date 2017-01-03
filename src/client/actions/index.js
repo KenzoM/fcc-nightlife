@@ -6,9 +6,11 @@ import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER } from './types';
 
 
 export function getYelp(city){
+  const timeDelay = 2000;
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
+    Materialize.toast(`Searching for clubs in ${city}...`, timeDelay)
     dispatch({
       type: GET_YELP
     })
@@ -30,11 +32,11 @@ export function signupUser( {userName, email, password}){
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userName', response.data.userName);
         browserHistory.push('/')
-        // Materialize.toast(`Welcome ${response.data.userName}!`, timeDelay)
+        Materialize.toast(`Welcome ${response.data.userName}!`, timeDelay)
       })
       .catch(response =>{
         console.log(response)
-        // Materialize.toast('Email already exist!', timeDelay)
+        Materialize.toast('Email already exist!', timeDelay)
       })
   }
 }
@@ -47,10 +49,10 @@ export function loginUser( {email, password}){
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userName', response.data.userName)
         browserHistory.push('/')
-        // Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
+        Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
       })
       .catch(() =>{
-        // Materialize.toast('Ooops! Wrong email/password!', timeDelay)
+        Materialize.toast('Ooops! Wrong email/password!', timeDelay)
       });
   }
 }
@@ -60,7 +62,7 @@ export function signoutUser(){
   localStorage.removeItem('token')
   localStorage.removeItem('userName')
   browserHistory.push('/')
-  // Materialize.toast(`See You Next Time!`, timeDelay)
+  Materialize.toast(`See You Next Time!`, timeDelay)
   return ({
     type: UNAUTH_USER
   })

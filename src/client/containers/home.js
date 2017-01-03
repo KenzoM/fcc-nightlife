@@ -23,7 +23,6 @@ class Home extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(props){
-    console.log(props)
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props
     this.props.getYelp(city)
