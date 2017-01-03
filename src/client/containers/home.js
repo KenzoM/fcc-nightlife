@@ -44,10 +44,11 @@ class Home extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, yelpData } = this.props;
+    const { handleSubmit, pristine, reset, submitting, yelpData, userName } = this.props;
     //isFetching helps sync correctly to load loader-image while fetching data from Yelp
     return (
       <div>
+        <h1>Welcome {userName || 'Guest'} !</h1>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field name="city" component={TextField} hintText="Enter Your City"/>
           <div>
@@ -70,7 +71,8 @@ Home = reduxForm({
 
 function mapStateToProps(state){
   return {
-    yelpData: state.yelpData
+    yelpData: state.yelpData,
+    userName: state.auth.userName
   }
 }
 
