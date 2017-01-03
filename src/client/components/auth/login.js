@@ -11,8 +11,8 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
   onSubmit(props){
-    console.log(props)
-    // this.props.loginUser(props)
+    // console.log(props)
+    this.props.loginUser(props)
   }
   render(){
     const { handleSubmit, submitting } = this.props;

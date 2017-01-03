@@ -8,7 +8,6 @@ import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER } from './types';
 export function getYelp(city){
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
   //Fetch the data and call another dispatch to indicate it received the data
-
   return (dispatch) => {
     dispatch({
       type: GET_YELP
@@ -37,6 +36,22 @@ export function signupUser( {userName, email, password}){
         console.log(response)
         // Materialize.toast('Email already exist!', timeDelay)
       })
+  }
+}
+export function loginUser( {email, password}){
+  let timeDelay = 4000;
+  return function(dispatch){
+    axios.post(`${ROOT_URL}/signin`, {email, password})
+      .then(response =>{
+        dispatch({type: AUTH_USER, payload: response.data.userName})
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('userName', response.data.userName)
+        browserHistory.push('/')
+        // Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
+      })
+      .catch(() =>{
+        // Materialize.toast('Ooops! Wrong email/password!', timeDelay)
+      });
   }
 }
 

@@ -18,10 +18,15 @@ const requireSignIn = passport.authenticate('local', { session: false });
 
 module.exports = function(app){
 
+  //Responsible of collecting YelpData's
   app.get('/yelp/:city', YelpData.getData)
 
-  app.post('/signup', Authentication.signup)
+  //this is just for test
   app.get('/signup', Authentication.get)
+
+  //Authentication Routes
+  app.post('/signup', Authentication.signup)
+  app.post('/signin', requireSignIn,  Authentication.signin)
 
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../../index.html'));
