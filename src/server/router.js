@@ -21,9 +21,6 @@ module.exports = function(app){
   //Responsible of collecting YelpData's
   app.get('/yelp/:city', YelpData.getData)
 
-  //this is just for test
-  app.get('/signup', Authentication.get)
-
   //Authentication Routes
   app.post('/signup', Authentication.signup)
   app.post('/signin', requireSignIn,  Authentication.signin)

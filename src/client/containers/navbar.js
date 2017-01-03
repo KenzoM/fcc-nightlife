@@ -12,7 +12,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-class AppBarExampleComposition extends Component {
+class Navbar extends Component {
   constructor(props){
     super(props);
   }
@@ -21,23 +21,24 @@ class AppBarExampleComposition extends Component {
     const { userName, authenticated } = this.props;
     if(authenticated){
       return [
-        <Tab label='Signoff' key={2} onClick={() => this.onSignOffClick()}/>
+        <Tab label='Signoff' value={4} key={2} onClick={() => this.onSignOffClick()}/>
       ]
     } else{
       return [
-        <Tab label='Login' key={0} containerElement={<Link to="/login" />}/>,
-        <Tab label='Signup' key={1} containerElement={<Link to="/signup" />}/>
+        <Tab label='Login' value={2} key={0} containerElement={<Link to="/login" />}/>,
+        <Tab label='Signup' value={3} key={1} containerElement={<Link to="/signup" />}/>
       ]
     }
   }
   onSignOffClick(){
-    const { signoutUser } = this.props
+    const { signoutUser, tabIndex } = this.props
     if (confirm('Are you sure you to signoff?')) {
       this.props.signoutUser();
     }
   }
 
   render() {
+    const { tabIndex } = this.props
     var styles = {
       appBar: {
         flexWrap: 'wrap'
@@ -51,9 +52,9 @@ class AppBarExampleComposition extends Component {
       //React-Router and Material-UI
       <div>
         <AppBar showMenuIconButton={false} style={styles.appBar} >
-          <Tabs style={styles.tabs} initialSelectedIndex={1}>
-            <Tab label='Home' containerElement={<Link to="/" />} />
-            <Tab label='About' containerElement={<Link to="/about" />} />
+          <Tabs style={styles.tabs} value={tabIndex} initialSelectedIndex={tabIndex}>
+            <Tab label='Home' value={0} containerElement={<Link to="/" />} />
+            <Tab label='About' value={1} containerElement={<Link to="/about" />} />
             {this.renderTabs()}
           </Tabs>
         </AppBar>
@@ -65,8 +66,9 @@ class AppBarExampleComposition extends Component {
 function mapStateToProps(state){
   return {
     authenticated: state.auth.authenticated,
-    userName: state.auth.userName
+    userName: state.auth.userName,
+    tabIndex: state.tabIndex.tab_index
   }
 }
 
-export default connect(mapStateToProps, actions)(AppBarExampleComposition);
+export default connect(mapStateToProps, actions)(Navbar);

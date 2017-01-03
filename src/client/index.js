@@ -13,7 +13,7 @@ import Login from './components/auth/login';
 import Signup from './components/auth/signup';
 import Home from './containers/home';
 
-import { AUTH_USER } from './actions/types'
+import { AUTH_USER , TAB_INDEX} from './actions/types'
 
 //This is for material-ui
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -40,10 +40,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="login" component={Login} />
-        <Route path="signup" component={Signup} />
-        <Route path="about" component={About} />
+        <IndexRoute component={Home} onEnter={() => store.dispatch( {type: TAB_INDEX, payload: 0} )} />
+        <Route path="about" component={About} onEnter={() => store.dispatch( {type: TAB_INDEX, payload: 1} )} />
+        <Route path="login" component={Login} onEnter={() => store.dispatch( {type: TAB_INDEX, payload: 2} )} />
+        <Route path="signup" component={Signup} onEnter={() => store.dispatch( {type: TAB_INDEX, payload: 3} )} />
       </Route>
     </Router>
   </Provider>

@@ -2,8 +2,14 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
-import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER } from './types';
+import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER, TAB_INDEX } from './types';
 
+export function changeTab(index){
+  return ({
+    type: TAB_INDEX,
+    payload: index
+  })
+}
 
 export function getYelp(city){
   const timeDelay = 2000;
@@ -50,6 +56,7 @@ export function loginUser( {email, password}){
         localStorage.setItem('userName', response.data.userName)
         browserHistory.push('/')
         Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
+        dispatch({type: TAB_INDEX, payload: 0})
       })
       .catch(() =>{
         Materialize.toast('Ooops! Wrong email/password!', timeDelay)

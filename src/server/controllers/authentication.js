@@ -46,10 +46,3 @@ exports.signup = function(req, res, next){
     })
   })
 }
-
-exports.get = function(req, res, next){
-  // const userName = req.body.userName
-  // const email = req.body.email;
-  // const password = req.body.password;
-  res.json({message: 'this is test'})
-}

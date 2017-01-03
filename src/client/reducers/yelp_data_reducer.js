@@ -9,6 +9,7 @@ export default function(state = INITIAL, action){
       return {...state, data: payload.businesses, isFetching: false}
     case GET_YELP:
       return {...state, isFetching: true}
+
   }
   return state;
 }
