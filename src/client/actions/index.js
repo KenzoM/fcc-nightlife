@@ -2,7 +2,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
-import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER, TAB_INDEX } from './types';
+import { GET_YELP, RECIEVE_YELP, REMOVE_YELP, AUTH_USER, UNAUTH_USER, TAB_INDEX } from './types';
 
 export function changeTab(index){
   return ({
@@ -66,11 +66,14 @@ export function loginUser( {email, password}){
 
 export function signoutUser(){
   let timeDelay = 3000;
-  localStorage.removeItem('token')
-  localStorage.removeItem('userName')
-  browserHistory.push('/')
-  Materialize.toast(`See You Next Time!`, timeDelay)
-  return ({
-    type: UNAUTH_USER
-  })
+  return (dispatch) =>{
+    dispatch({
+      type: REMOVE_YELP
+    })
+    localStorage.removeItem('token')
+    localStorage.removeItem('userName')
+    browserHistory.push('/')
+    Materialize.toast(`See You Next Time!`, timeDelay)
+    dispatch({type: UNAUTH_USER})
+  }
 }

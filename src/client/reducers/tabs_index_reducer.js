@@ -8,7 +8,6 @@ export default function(state = INITIAL, action){
     case TAB_INDEX:
       const { payload } = action;
       return {...state, tab_index: payload}
-
   }
   return state;
 }
