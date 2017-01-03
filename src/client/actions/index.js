@@ -2,7 +2,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
-import { GET_YELP, RECIEVE_YELP, AUTH_USER } from './types';
+import { GET_YELP, RECIEVE_YELP, AUTH_USER, UNAUTH_USER } from './types';
 
 
 export function getYelp(city){
@@ -23,13 +23,11 @@ export function getYelp(city){
 }
 
 export function signupUser( {userName, email, password}){
-  console.log(userName, email, password)
   let timeDelay = 4000;
   return function(dispatch){
     axios.post(`${ROOT_URL}/signup`, { userName, email, password})
       .then(response =>{
         dispatch({type: AUTH_USER, payload: response.data.userName})
-        console.log(response, 'this IS RESPONSE')
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userName', response.data.userName);
         browserHistory.push('/')
@@ -40,4 +38,15 @@ export function signupUser( {userName, email, password}){
         // Materialize.toast('Email already exist!', timeDelay)
       })
   }
+}
+
+export function signoutUser(){
+  let timeDelay = 3000;
+  localStorage.removeItem('token')
+  localStorage.removeItem('userName')
+  browserHistory.push('/')
+  // Materialize.toast(`See You Next Time!`, timeDelay)
+  return ({
+    type: UNAUTH_USER
+  })
 }

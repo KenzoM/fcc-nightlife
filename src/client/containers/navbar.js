@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import * as actions from '../actions/'
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -13,6 +15,26 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 class AppBarExampleComposition extends Component {
   constructor(props){
     super(props);
+  }
+
+  renderTabs(){
+    const { userName, authenticated } = this.props;
+    if(authenticated){
+      return [
+        <Tab label='Signoff' key={2} onClick={() => this.onSignOffClick()}/>
+      ]
+    } else{
+      return [
+        <Tab label='Login' key={0} containerElement={<Link to="/login" />}/>,
+        <Tab label='Signup' key={1} containerElement={<Link to="/signup" />}/>
+      ]
+    }
+  }
+  onSignOffClick(){
+    const { signoutUser } = this.props
+    if (confirm('Are you sure you to signoff?')) {
+      this.props.signoutUser();
+    }
   }
 
   render() {
@@ -32,8 +54,7 @@ class AppBarExampleComposition extends Component {
           <Tabs style={styles.tabs} initialSelectedIndex={1}>
             <Tab label='Home' containerElement={<Link to="/" />} />
             <Tab label='About' containerElement={<Link to="/about" />} />
-            <Tab label='Login' containerElement={<Link to="/login" />}/>
-            <Tab label='Signup' containerElement={<Link to="/signup" />}/>
+            {this.renderTabs()}
           </Tabs>
         </AppBar>
       </div>
@@ -41,4 +62,11 @@ class AppBarExampleComposition extends Component {
   }
 }
 
-export default AppBarExampleComposition;
+function mapStateToProps(state){
+  return {
+    authenticated: state.auth.authenticated,
+    userName: state.auth.userName
+  }
+}
+
+export default connect(mapStateToProps, actions)(AppBarExampleComposition);
