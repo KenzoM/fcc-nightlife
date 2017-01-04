@@ -14,6 +14,9 @@ export function changeTab(index){
 export function getYelp(city){
   const timeDelay = 2000;
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
+  if (localStorage.getItem('token')){
+    console.log('currently signed in')
+  }
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
     Materialize.toast(`Searching for clubs in ${city}...`, timeDelay)
@@ -34,9 +37,10 @@ export function signupUser( {userName, email, password}){
   return function(dispatch){
     axios.post(`${ROOT_URL}/signup`, { userName, email, password})
       .then(response =>{
-        dispatch({type: AUTH_USER, payload: response.data.userName})
+        dispatch({type: AUTH_USER, payload: response.data.userName, email: response.data.email})
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userName', response.data.userName);
+        localStorage.setItem('email', response.data.email);
         browserHistory.push('/')
         Materialize.toast(`Welcome ${response.data.userName}!`, timeDelay)
       })
@@ -51,9 +55,10 @@ export function loginUser( {email, password}){
   return function(dispatch){
     axios.post(`${ROOT_URL}/signin`, {email, password})
       .then(response =>{
-        dispatch({type: AUTH_USER, payload: response.data.userName})
+        dispatch({type: AUTH_USER, payload: response.data.userName, email: response.data.email})
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userName', response.data.userName)
+        localStorage.setItem('email', response.data.email);
         browserHistory.push('/')
         Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
         dispatch({type: TAB_INDEX, payload: 0})
@@ -72,6 +77,7 @@ export function signoutUser(){
     })
     localStorage.removeItem('token')
     localStorage.removeItem('userName')
+    localStorage.removeItem('email')
     browserHistory.push('/')
     Materialize.toast(`See You Next Time!`, timeDelay)
     dispatch({type: UNAUTH_USER})

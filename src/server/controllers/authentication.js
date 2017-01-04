@@ -10,11 +10,10 @@ function tokenForUser(user){
 exports.signin = function(req, res, next){
   // User has already had their email and password autho'd
   // We just need to give them a token
-  res.send({ token: tokenForUser(req.user), userName: req.user.userName})
+  res.send({ token: tokenForUser(req.user), userName: req.user.userName, email: req.user.email})
 }
 
 exports.signup = function(req, res, next){
-  console.log(req.body)
   const userName = req.body.userName
   const email = req.body.email;
   const password = req.body.password;
@@ -42,7 +41,7 @@ exports.signup = function(req, res, next){
 
     user.save(function(err){
       if (err) {return next(err)}
-      res.json({token: tokenForUser(user), userName: userName })
+      res.json({token: tokenForUser(user), userName: userName, email: email })
     })
   })
 }
