@@ -41,6 +41,7 @@ export function signupUser( {userName, email, password}){
     axios.post(`${ROOT_URL}/signup`, { userName, email, password})
       .then(response =>{
         dispatch({type: AUTH_USER, payload: response.data.userName, email: response.data.email})
+        dispatch({type: REMOVE_YELP})
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userName', response.data.userName);
         localStorage.setItem('email', response.data.email);
