@@ -32,12 +32,6 @@ app.use(require('webpack-hot-middleware')(compiler, {
   path: '/__webpack_hmr',
 }));
 
-app.use('/yelp/:city', function(req, res, next){
-  console.log('TEST BBABY~~~~')
-  console.log(req.params.city)
-  next()
-})
-
 //App Setup
 app.use(morgan('combined'));
 
@@ -45,9 +39,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
 router(app);
-
 
 //Server Setup(Express)
 app.listen(port,()=>{

@@ -14,11 +14,14 @@ export function changeTab(index){
 export function getYelp(city){
   const timeDelay = 2000;
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
-  if (localStorage.getItem('token')){
-    console.log('currently signed in')
-  }
+  // const updateHistorySearch = axios.get(`${ROOT_URL}/user/${email}`)
+  const currentEmail = localStorage.getItem('email')
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
+    //if logged in, update the current user's history search
+    if (currentEmail){
+      axios.put(`${ROOT_URL}/user/${currentEmail}/${city}`)
+    }
     Materialize.toast(`Searching for clubs in ${city}...`, timeDelay)
     dispatch({
       type: GET_YELP

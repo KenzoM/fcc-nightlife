@@ -6,6 +6,7 @@ const token = require('./config').token;
 const token_secret = require('./config').token_secret;
 
 const YelpData = require('./controllers/yelpdata')
+const User = require('./controllers/user')
 
 //For JWT & Authentication purposes
 const Authentication = require('./controllers/authentication');
@@ -20,6 +21,9 @@ module.exports = function(app){
 
   //Responsible of collecting YelpData's
   app.get('/yelp/:city', YelpData.getData)
+
+  //Responsible of updating user's last search history
+  app.put('/user/:email/:city', User.UpdateHistorySearch)
 
   //Authentication Routes
   app.post('/signup', Authentication.signup)

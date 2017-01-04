@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
+/*
+UserSchema:
+  userName: to display who's currently logged in
+  email: used for authentication and update lastCity history
+  passowrd: used for authentication
+  lastCity: retrieve the last search the user made after logging out
+*/
+
 const userSchema = new Schema({
   userName: String,
   email: {
@@ -9,7 +17,11 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true
   },
-  password: String
+  password: String,
+  lastCity: {
+    type: String,
+    default: ''
+  }
 })
 
 //Using bcrypt to encrypt our uses's password
