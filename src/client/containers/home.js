@@ -22,6 +22,13 @@ class Home extends Component {
     this.state = {distanceSlider: 0}
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentDidMount(){
+    const { yelpData } = this.props;
+    if (yelpData.lastCity){
+      this.props.getYelp(yelpData.lastCity)
+    }
+  }
+  
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props

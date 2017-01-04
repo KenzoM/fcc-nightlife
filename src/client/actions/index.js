@@ -1,8 +1,9 @@
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
-import Snackbar from 'material-ui/Snackbar';
-import { GET_YELP, RECIEVE_YELP, REMOVE_YELP, AUTH_USER, UNAUTH_USER, TAB_INDEX } from './types';
+import { GET_YELP, RECIEVE_YELP,
+  REMOVE_YELP, LAST_CITY, AUTH_USER,
+  UNAUTH_USER, TAB_INDEX } from './types';
 
 export function changeTab(index){
   return ({
@@ -14,13 +15,17 @@ export function changeTab(index){
 export function getYelp(city){
   const timeDelay = 2000;
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
-  // const updateHistorySearch = axios.get(`${ROOT_URL}/user/${email}`)
   const currentEmail = localStorage.getItem('email')
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
     //if logged in, update the current user's history search
     if (currentEmail){
       axios.put(`${ROOT_URL}/user/${currentEmail}/${city}`)
+    }
+
+    //if city parameter is empty or undefined, dispatch REMOVE_YELP
+    if(!city){
+      return dispatch({type: REMOVE_YELP})
     }
     Materialize.toast(`Searching for clubs in ${city}...`, timeDelay)
     dispatch({
@@ -36,7 +41,7 @@ export function getYelp(city){
 }
 
 export function signupUser( {userName, email, password}){
-  let timeDelay = 4000;
+  let timeDelay = 2000;
   return function(dispatch){
     axios.post(`${ROOT_URL}/signup`, { userName, email, password})
       .then(response =>{
@@ -55,7 +60,7 @@ export function signupUser( {userName, email, password}){
   }
 }
 export function loginUser( {email, password}){
-  let timeDelay = 4000;
+  let timeDelay = 2000;
   return function(dispatch){
     axios.post(`${ROOT_URL}/signin`, {email, password})
       .then(response =>{
@@ -63,9 +68,10 @@ export function loginUser( {email, password}){
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userName', response.data.userName)
         localStorage.setItem('email', response.data.email);
-        browserHistory.push('/')
         Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
+        dispatch({type: LAST_CITY, payload: response.data.city})
         dispatch({type: TAB_INDEX, payload: 0})
+        browserHistory.push('/')
       })
       .catch(() =>{
         Materialize.toast('Ooops! Wrong email/password!', timeDelay)
@@ -74,7 +80,7 @@ export function loginUser( {email, password}){
 }
 
 export function signoutUser(){
-  let timeDelay = 3000;
+  let timeDelay = 2000;
   return (dispatch) =>{
     dispatch({
       type: REMOVE_YELP
