@@ -28,7 +28,7 @@ class Home extends Component {
       this.props.getYelp(yelpData.lastCity)
     }
   }
-  
+
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props
@@ -37,12 +37,17 @@ class Home extends Component {
 
   renderCards({name, display_phone, location, image_url, snippet_text, id, url}){
     let address = location.address[0];
+    if(!snippet_text){
+      snippet_text = 'No reviews at the moment'
+    } else{
+      snippet_text = `"${snippet_text}"`
+    }
     return(
       <YelpCard
         key={id}
         name={name}
         address={address}
-        image_url={image_url}
+        image_url={image_url || 'http://al3qarat.com/images/sorry_not_available.gif'}
         snippet_text={snippet_text}
         display_phone={display_phone}
         url={url}
