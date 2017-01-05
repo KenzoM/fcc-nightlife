@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
@@ -8,7 +9,7 @@ class YelpCard extends Component {
     super(props)
   }
   render(){
-    const { name, address, display_phone, image_url, snippet_text, url } = this.props
+    const { name, address, display_phone, image_url, snippet_text, url, auth } = this.props
     return(
       <Card className="my-card">
         <CardMedia overlay={<CardTitle title={name} />}>
@@ -20,11 +21,18 @@ class YelpCard extends Component {
         </CardText>
         <CardActions>
           <FlatButton label="Reviews at Yelp" href={url} target="_blank"/>
-          <FlatButton label="Going?" />
+          <FlatButton label="List of Guest" primary={true} />
+          <FlatButton label="Going?" secondary={true} disabled={!auth} />
         </CardActions>
       </Card>
     )
   }
 }
 
-export default YelpCard;
+function mapStateToProps(state){
+  return {
+    auth: state.auth.authenticated
+  }
+}
+
+export default connect(mapStateToProps)(YelpCard);
