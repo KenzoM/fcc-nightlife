@@ -25,6 +25,12 @@ module.exports = function(app){
   //Responsible of updating user's last search history
   app.put('/user/:email/:city', User.UpdateHistorySearch)
 
+  app.get('/user/:email/:city', function(req, res, next){
+    console.log(req.params)
+    console.log('POOP')
+    next()
+  })
+
   //Authentication Routes
   app.post('/signup', Authentication.signup)
   app.post('/signin', requireSignIn,  Authentication.signin)

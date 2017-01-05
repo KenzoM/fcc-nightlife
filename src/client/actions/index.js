@@ -22,7 +22,6 @@ export function getYelp(city){
     if (currentEmail){
       axios.put(`${ROOT_URL}/user/${currentEmail}/${city}`)
     }
-
     //if city parameter is empty or undefined, dispatch REMOVE_YELP
     if(!city){
       return dispatch({type: REMOVE_YELP})
@@ -32,6 +31,12 @@ export function getYelp(city){
       type: GET_YELP
     })
     request.then( ({data}) =>{
+      // console.log(data)
+      // this will iterate each clubID to see if the current user is on the guest list RSVP
+      data.businesses.forEach( clubID => {
+        console.log(clubID.id)
+        axios.get(`${ROOT_URL}/user/${currentEmail}/${clubID.id}`)
+      })
       dispatch({ type: RECIEVE_YELP, payload: data})
     })
     .catch(function (error) {

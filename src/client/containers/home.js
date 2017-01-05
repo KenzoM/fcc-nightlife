@@ -31,7 +31,8 @@ class Home extends Component {
 
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
-    const { city } = props
+    const { city } = props;
+    // const { userEmail } = this.props
     this.props.getYelp(city)
   }
 
@@ -84,7 +85,8 @@ Home = reduxForm({
 function mapStateToProps(state){
   return {
     yelpData: state.yelpData,
-    userName: state.auth.userName
+    userName: state.auth.userName,
+    userEmail: state.auth.email
   }
 }
 

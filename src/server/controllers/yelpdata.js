@@ -23,6 +23,10 @@ exports.getData = function(req, res, next){
     category_filter: 'bars'
    })
   .then(function (data) {
+    // Maybe add another function to check each data's ID and check users' email
+    // data.businesses.forEach(club =>{
+    //   console.log(club.id)
+    // })
     res.send(data)
   })
   .catch(function (err) {

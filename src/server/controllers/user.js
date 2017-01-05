@@ -12,3 +12,8 @@ exports.UpdateHistorySearch = function(req, res, next){
     if (err) {return next(err)};
   })
 }
+
+exports.GuestLists = function(req, res, next){
+  const email = req.params.email;
+  const city = req.params.city;
+}
