@@ -24,7 +24,7 @@ class Home extends Component {
   }
   componentDidMount(){
     const { yelpData } = this.props;
-    if (yelpData.lastCity){
+    if (yelpData.lastCity && yelpData.lastCity !== 'undefined'){
       this.props.getYelp(yelpData.lastCity)
     }
   }
