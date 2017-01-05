@@ -4,7 +4,7 @@ import { reduxForm, Field, formValueSelector } from 'redux-form'
 import * as actions from '../actions/';
 import { Link } from 'react-router';
 import LoadingCircle from '../components/LoadingCircle'
-import YelpCard from '../components/YelpCard'
+import YelpCard from './YelpCard'
 import MenuItem from 'material-ui/MenuItem'
 import { RadioButton } from 'material-ui/RadioButton'
 import {

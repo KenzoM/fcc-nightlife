@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
+import Checkbox from 'material-ui/Checkbox';
 
 class YelpCard extends Component {
   constructor(props) {
@@ -22,7 +23,13 @@ class YelpCard extends Component {
         <CardActions>
           <FlatButton label="Reviews at Yelp" href={url} target="_blank"/>
           <FlatButton label="List of Guest" primary={true} />
-          <FlatButton label="Going?" secondary={true} disabled={!auth} />
+          <Checkbox
+            name="rsvp"
+            label="Going Tonight?"
+            disabled={!auth}
+            defaultChecked={true}
+            onClick={ ()=> console.log('TEST!!')}
+          />
         </CardActions>
       </Card>
     )
