@@ -3,7 +3,7 @@ const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
 import { GET_YELP, RECIEVE_YELP,
   REMOVE_YELP, LAST_CITY, AUTH_USER,
-  UNAUTH_USER, TAB_INDEX } from './types';
+  UNAUTH_USER, TAB_INDEX, UPDATE_GUEST} from './types';
 
 export function changeTab(index){
   return ({
@@ -34,15 +34,30 @@ export function getYelp(city){
     request.then( ({data}) =>{
       // console.log(data)
       // this will iterate each clubID to see if the current user is on the guest list RSVP
-      data.businesses.forEach( clubID => {
-        axios.get(`${ROOT_URL}/club/${currentEmail}/${clubID.id}`)
-      })
+      // data.businesses.forEach( clubID => {
+      //   axios.get(`${ROOT_URL}/club/${currentEmail}/${clubID.id}`)
+      // })
       dispatch({ type: RECIEVE_YELP, payload: data})
     })
     .catch(function (error) {
       console.log(error);
     });
   }
+}
+
+export function updateGuestList(clubID, userName, userEmail ){
+  console.log(clubID, userName, userEmail)
+  // let { clubID: clubID, userName: userName, userEmail: userEmail}
+  return function(dispatch){
+    axios.post(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
+      .then(response =>{
+        dispatch({type: UPDATE_GUEST})
+      })
+      .catch(response =>{
+        console.log(response)
+      })
+  }
+  // /club/:clubID/:userName/:userEmail
 }
 
 export function signupUser( {userName, email, password}){

@@ -46,6 +46,7 @@ class Home extends Component {
     return(
       <YelpCard
         key={id}
+        clubID={id}
         name={name}
         address={address}
         image_url={image_url || 'http://al3qarat.com/images/sorry_not_available.gif'}

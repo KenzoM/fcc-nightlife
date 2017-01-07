@@ -26,6 +26,14 @@ module.exports = function(app){
   //Responsible of updating user's last search history
   app.put('/user/:email/:city', User.UpdateHistorySearch)
 
+  //Responsile of updating guestList in particular club, as well as
+  //current user's own RSVP club lists
+  app.post('/club/:clubID/:userName/:userEmail', function(req, res, next){
+    console.log(req.params)
+    res.send({message: 'this is just message'})
+    next()
+  })
+
   //Responsible of retriving current guestList in particular clubs
   app.get('/club/:email/:city', Club.GuestLists )
 
