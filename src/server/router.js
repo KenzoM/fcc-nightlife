@@ -7,6 +7,7 @@ const token_secret = require('./config').token_secret;
 
 const YelpData = require('./controllers/yelpdata')
 const User = require('./controllers/user')
+const Club = require('./controllers/club')
 
 //For JWT & Authentication purposes
 const Authentication = require('./controllers/authentication');
@@ -25,10 +26,12 @@ module.exports = function(app){
   //Responsible of updating user's last search history
   app.put('/user/:email/:city', User.UpdateHistorySearch)
 
-  app.get('/user/:email/:city', function(req, res, next){
-    console.log(req.params)
-    console.log('POOP')
-    next()
+  //Responsible of retriving current guestList in particular clubs
+  app.get('/club/:email/:city', Club.GuestLists )
+
+  //Responsible of adding guests in particular clubs
+  app.post('/club/:email:city', function(req, res, next){
+
   })
 
   //Authentication Routes
@@ -40,3 +43,10 @@ module.exports = function(app){
   });
 
 }
+
+
+// I'm having hard time how to go on about keeping track of users of where they are attending bar. I am creating the app with MERN with Redux.
+//
+// This is what I've planned out so far:
+//
+// When a signed-in user submit a form to fetch` data (city of the name for example),  from Yelp's API, before Redux's reducer receives the data, it will go straight to my server where it will copy the all of the data, and add attribute for the current user

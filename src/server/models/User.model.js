@@ -17,7 +17,7 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true
   },
-  clubs: [],
+  clubs: [String],
   password: String,
   lastCity: {
     type: String,

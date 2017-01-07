@@ -11,6 +11,8 @@ exports.UpdateHistorySearch = function(req, res, next){
   User.findOneAndUpdate({email: email}, { $set: { lastCity: city } }, function(err, existingUser){
     if (err) {return next(err)};
   })
+  res.send({message: 'success!'})
+  next()
 }
 
 exports.GuestLists = function(req, res, next){
