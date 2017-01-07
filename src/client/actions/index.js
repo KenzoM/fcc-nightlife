@@ -49,7 +49,7 @@ export function updateGuestList(clubID, userName, userEmail ){
   console.log(clubID, userName, userEmail)
   // let { clubID: clubID, userName: userName, userEmail: userEmail}
   return function(dispatch){
-    axios.post(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
+    axios.put(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
       .then(response =>{
         dispatch({type: UPDATE_GUEST})
       })

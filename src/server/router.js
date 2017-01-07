@@ -28,11 +28,7 @@ module.exports = function(app){
 
   //Responsile of updating guestList in particular club, as well as
   //current user's own RSVP club lists
-  app.post('/club/:clubID/:userName/:userEmail', function(req, res, next){
-    console.log(req.params)
-    res.send({message: 'this is just message'})
-    next()
-  })
+  app.put('/club/:clubID/:userName/:userEmail', Club.UpdateGuestList)
 
   //Responsible of retriving current guestList in particular clubs
   app.get('/club/:email/:city', Club.GuestLists )
