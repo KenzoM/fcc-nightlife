@@ -14,7 +14,7 @@ exports.UpdateGuestList = function(req, res, next){
   const userName = req.params.userName
   const userEmail = req.params.userEmail;
 
-  function test(){
+  function updateClubSchema(){
     console.log('testing~~~')
     return new Promise(function(resolve, reject){
       Club.findOne({ clubID: clubID}, function(err, existingClub){
@@ -43,7 +43,6 @@ exports.UpdateGuestList = function(req, res, next){
           resolve()
           return res.send({"message": "done"})
         }
-
         // If clubID does not exist, create and save clubID
         const club = new Club({
           clubID: clubID,
@@ -59,8 +58,23 @@ exports.UpdateGuestList = function(req, res, next){
     })
 
   }
-  test().then(function(){
-    console.log('EWREWREWRW')
-    console.log(data, 'this is resolved@!@')
+  updateClubSchema().then(function(){ //update Usermodel after Club
+    User.findOne({email: userEmail}, function(err, existingUser){
+      if(err){return console.error(err)}
+      if(existingUser.clubs.includes(clubID)){
+        console.log('remove club in the user list')
+        User.findOneAndUpdate({email: userEmail}, {$pull: {clubs: clubID}}, function(err, doc){
+          if(err) {console.error(err)}
+          console.log(doc)
+        })
+      } else{
+        console.log('add club in user list')
+        User.findOneAndUpdate({email: userEmail}, {$push: {clubs: clubID}}, function(err, doc){
+          if(err) {console.error(err)}
+          console.log(doc)
+        })
+
+      }
+    })
   })
 }
