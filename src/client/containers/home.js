@@ -21,6 +21,7 @@ class Home extends Component {
     super(props);
     this.state = {distanceSlider: 0}
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderCards = this.renderCards.bind(this)
   }
   componentDidMount(){
     const { yelpData } = this.props;
@@ -86,6 +87,7 @@ Home = reduxForm({
 function mapStateToProps(state){
   return {
     yelpData: state.yelpData,
+    isReserved: state.yelpData.isReserved,
     userName: state.auth.userName,
     userEmail: state.auth.email
   }

@@ -31,7 +31,7 @@ module.exports = function(app){
   app.put('/club/:clubID/:userName/:userEmail', Club.UpdateGuestList)
 
   //Responsible of retriving current guestList in particular clubs
-  app.get('/club/:email/:city', Club.GuestLists )
+  app.get('/club/:email/:clubID', Club.GuestLists )
 
   //Responsible of adding guests in particular clubs
   app.post('/club/:email:city', function(req, res, next){

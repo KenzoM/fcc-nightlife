@@ -34,9 +34,25 @@ export function getYelp(city){
     request.then( ({data}) =>{
       // console.log(data)
       // this will iterate each clubID to see if the current user is on the guest list RSVP
-      // data.businesses.forEach( clubID => {
-      //   axios.get(`${ROOT_URL}/club/${currentEmail}/${clubID.id}`)
-      // })
+      let currentUserReservations = [];
+      let placeholder = [];
+      data.businesses.map( club => {
+        // console.log(club.id, 'this is club')
+        axios.get(`${ROOT_URL}/club/${currentEmail}/${club.id}`)
+          .then( ({data}) => {
+            placeholder.push( Object.assign({}, club, data))
+          })
+          // .then( () => {
+          //   data.businesses = placeholder
+          // })
+          // .then( () => {
+          //   console.log(data, 'this is entire data')
+          // })
+      })
+
+      // console.log(data, 'entire data')
+      // create new data object to retrieve info of current-user's reservation
+      data = Object.assign({}, data, {currentUserReservations: currentUserReservations})
       dispatch({ type: RECIEVE_YELP, payload: data})
     })
     .catch(function (error) {
@@ -46,7 +62,6 @@ export function getYelp(city){
 }
 
 export function updateGuestList(clubID, userName, userEmail ){
-  console.log(clubID, userName, userEmail)
   // let { clubID: clubID, userName: userName, userEmail: userEmail}
   return function(dispatch){
     axios.put(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
