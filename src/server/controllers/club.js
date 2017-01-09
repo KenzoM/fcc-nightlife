@@ -5,18 +5,24 @@ const Club = require('../models/Club.model');
 exports.GuestLists = function(req, res, next){
   const userEmail = req.params.email;
   const clubID = req.params.clubID;
-  User.findOne({ email: userEmail}, function(err, existingUser){
-    if(err) {console.error(err)}
-    if (existingUser.clubs.includes(clubID)){
-      console.log('current user is RESERVED')
-      return res.send({"isCurrentUserReserved" : true})
-    } else{
-      console.log('current user is NOT RESERVED')
-      return res.send({"isCurrentUserReserved" : false})
-    }
-  })
-  // res.send({"message" : 'Soemthing something'})
-  // next()
+  // if user is not logged in, skip of going through the database
+  if (userEmail !== 'null'){
+    User.findOne({ email: userEmail}, function(err, existingUser){
+      if(err) {console.error(err)}
+      if (existingUser.clubs.includes(clubID)){
+        console.log('current user is RESERVED')
+        return res.send({"isCurrentUserReserved" : true})
+      } else{
+        console.log('current user is NOT RESERVED')
+        return res.send({"isCurrentUserReserved" : false})
+      }
+    })
+  } else{
+    res.send({"message" : 'Soemthing something'})
+    next()
+  }
+
+
 }
 
 exports.UpdateGuestList = function(req, res, next){

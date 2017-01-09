@@ -14,6 +14,7 @@ export function changeTab(index){
 
 export function getYelp(city){
   const timeDelay = 2000;
+  // request holds the information from Yelp API
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
   const currentEmail = localStorage.getItem('email')
   //Fetch the data and call another dispatch to indicate it received the data
@@ -45,7 +46,7 @@ export function getYelp(city){
       Promise.all(promisedClubs).then(clubs => {
         dispatch({ type: RECIEVE_YELP, payload: data})
       }, failedClub => {
-        console.log('error!!')
+        console.log('Error has happened')
       });
 
     })
