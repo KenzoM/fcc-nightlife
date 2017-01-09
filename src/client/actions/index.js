@@ -34,13 +34,12 @@ export function getYelp(city){
     request.then( ({data}) =>{
       // this will iterate each clubID to see if the current user is on the guest list RSVP
       let currentUserReservations = [];
-      let placeholder = [];
       let promisedClubs = data.businesses.map( club =>
         axios.get(`${ROOT_URL}/club/${currentEmail}/${club.id}`)
           .then( ({data}) => {
-            placeholder.push( Object.assign({}, club, data))
+            currentUserReservations.push( Object.assign({}, club, data))
           })
-          .then( () => data.businesses = placeholder )
+          .then( () => data.businesses = currentUserReservations )
       );
 
       Promise.all(promisedClubs).then(clubs => {
@@ -48,7 +47,7 @@ export function getYelp(city){
       }, failedClub => {
         console.log('error!!')
       });
-      
+
     })
     .catch(function (error) {
       console.log(error);
@@ -56,18 +55,17 @@ export function getYelp(city){
   }
 }
 
-export function updateGuestList(clubID, userName, userEmail ){
-  // let { clubID: clubID, userName: userName, userEmail: userEmail}
-  return function(dispatch){
+export function updateGuestList(clubID, userName, userEmail, city ){
+  return (dispatch) => {
+    // this simply updates the current user RSVP and dispatch getYelp
     axios.put(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
       .then(response =>{
-        dispatch({type: UPDATE_GUEST})
+        dispatch(getYelp(city))
       })
       .catch(response =>{
         console.log(response)
       })
   }
-  // /club/:clubID/:userName/:userEmail
 }
 
 export function signupUser( {userName, email, password}){
@@ -101,6 +99,7 @@ export function loginUser( {email, password}){
         Materialize.toast(`Welcome back ${response.data.userName}!`, timeDelay)
         dispatch({type: LAST_CITY, payload: response.data.city})
         dispatch({type: TAB_INDEX, payload: 0})
+        dispatch(getYelp(response.data.city))
         browserHistory.push('/')
       })
       .catch(() =>{

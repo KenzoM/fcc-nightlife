@@ -12,12 +12,12 @@ class YelpCard extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(){
-    const {clubID, userName, userEmail } = this.props
-    this.props.updateGuestList(clubID, userName, userEmail)
+    const {clubID, userName, userEmail, city } = this.props
+    this.props.updateGuestList(clubID, userName, userEmail, city)
   }
   render(){
     const { name, clubID, address, display_phone, image_url,
-      snippet_text, url, auth, userName, userEmail, isCurrentUserReserved } = this.props
+      snippet_text, url, auth, userName, userEmail, isCurrentUserReserved, city } = this.props
       let labelText = isCurrentUserReserved ? 'Yes I am going!' : 'Going Tonight?'
     return(
       <Card className="my-card">

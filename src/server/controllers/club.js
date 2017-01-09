@@ -68,6 +68,7 @@ exports.UpdateGuestList = function(req, res, next){
     })
 
   }
+
   updateClubSchema().then(function(){ //update Usermodel after Club
     User.findOne({email: userEmail}, function(err, existingUser){
       if(err){return console.error(err)}

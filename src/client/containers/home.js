@@ -24,10 +24,10 @@ class Home extends Component {
     this.renderCards = this.renderCards.bind(this)
   }
   componentDidMount(){
-    const { yelpData } = this.props;
-    if (yelpData.lastCity && yelpData.lastCity !== 'undefined'){
-      this.props.getYelp(yelpData.lastCity)
-    }
+    // const { yelpData } = this.props;
+    // if (yelpData.lastCity && yelpData.lastCity !== 'undefined'){
+    //   this.props.getYelp(yelpData.lastCity)
+    // }
   }
 
   onSubmit(props){
@@ -39,6 +39,7 @@ class Home extends Component {
 
   renderCards({name, display_phone, location, image_url, isCurrentUserReserved, snippet_text, id, url}){
     let address = location.address[0];
+    const { yelpData } = this.props;
     if(!snippet_text){
       snippet_text = 'No reviews at the moment'
     } else{
@@ -54,6 +55,7 @@ class Home extends Component {
         snippet_text={snippet_text}
         display_phone={display_phone}
         url={url}
+        city={yelpData.lastCity}
         isCurrentUserReserved={isCurrentUserReserved}
         />
     )

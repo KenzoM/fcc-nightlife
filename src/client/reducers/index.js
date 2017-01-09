@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   yelpData: YelpData,
   tabIndex: TabIndex,
-  auth: Authenticated
+  auth: Authenticated,
+  guestList: GuestList
 });
 
 export default rootReducer;
