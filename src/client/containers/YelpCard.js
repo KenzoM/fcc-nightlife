@@ -17,7 +17,8 @@ class YelpCard extends Component {
   }
   render(){
     const { name, clubID, address, display_phone, image_url,
-      snippet_text, url, auth, userName, userEmail } = this.props
+      snippet_text, url, auth, userName, userEmail, isCurrentUserReserved } = this.props
+      let labelText = isCurrentUserReserved ? 'Yes I am going!' : 'Going Tonight?'
     return(
       <Card className="my-card">
         <CardMedia overlay={<CardTitle title={name} />}>
@@ -31,7 +32,7 @@ class YelpCard extends Component {
           <FlatButton label="Reviews at Yelp" href={url} target="_blank"/>
           <FlatButton label="List of Guest" primary={true} />
           <FlatButton
-            label="Going Tonight?"
+            label={labelText}
             disabled={!auth}
             onClick={ () => this.onSubmit()}
             secondary={true} />

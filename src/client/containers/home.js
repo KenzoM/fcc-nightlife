@@ -37,7 +37,7 @@ class Home extends Component {
     this.props.getYelp(city)
   }
 
-  renderCards({name, display_phone, location, image_url, snippet_text, id, url}){
+  renderCards({name, display_phone, location, image_url, isCurrentUserReserved, snippet_text, id, url}){
     let address = location.address[0];
     if(!snippet_text){
       snippet_text = 'No reviews at the moment'
@@ -54,6 +54,7 @@ class Home extends Component {
         snippet_text={snippet_text}
         display_phone={display_phone}
         url={url}
+        isCurrentUserReserved={isCurrentUserReserved}
         />
     )
   }
