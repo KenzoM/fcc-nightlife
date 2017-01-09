@@ -32,28 +32,23 @@ export function getYelp(city){
       type: GET_YELP
     })
     request.then( ({data}) =>{
-      // console.log(data)
       // this will iterate each clubID to see if the current user is on the guest list RSVP
       let currentUserReservations = [];
       let placeholder = [];
-      data.businesses.map( club => {
-        // console.log(club.id, 'this is club')
+      let promisedClubs = data.businesses.map( club =>
         axios.get(`${ROOT_URL}/club/${currentEmail}/${club.id}`)
           .then( ({data}) => {
             placeholder.push( Object.assign({}, club, data))
           })
-          // .then( () => {
-          //   data.businesses = placeholder
-          // })
-          // .then( () => {
-          //   console.log(data, 'this is entire data')
-          // })
-      })
+          .then( () => data.businesses = placeholder )
+      );
 
-      // console.log(data, 'entire data')
-      // create new data object to retrieve info of current-user's reservation
-      data = Object.assign({}, data, {currentUserReservations: currentUserReservations})
-      dispatch({ type: RECIEVE_YELP, payload: data})
+      Promise.all(promisedClubs).then(clubs => {
+        dispatch({ type: RECIEVE_YELP, payload: data})
+      }, failedClub => {
+        console.log('error!!')
+      });
+      
     })
     .catch(function (error) {
       console.log(error);
