@@ -91,7 +91,6 @@ exports.UpdateGuestList = function(req, res, next){
           // res.send({"message": "added club in user list"})
           return res.send({"message": "added club in user list"})
         })
-
       }
     })
   })

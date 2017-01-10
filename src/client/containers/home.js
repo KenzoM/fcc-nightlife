@@ -71,7 +71,7 @@ class Home extends Component {
           <Field name="city" component={TextField} hintText="Enter Your City"/>
           <div>
             <button type="submit" disabled={yelpData.isFetching}>Submit</button>
-            <button type="button" disabled={pristine || yelpData.isFetching} onClick={reset}>Clear</button>
+            <button type="button" disabled={pristine || yelpData.isFetching} onTouchTap={reset}>Clear</button>
           </div>
         </form>
         <div className="my-container">

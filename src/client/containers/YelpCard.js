@@ -29,13 +29,21 @@ class YelpCard extends Component {
           {snippet_text}
         </CardText>
         <CardActions>
-          <FlatButton label="Reviews at Yelp" href={url} target="_blank"/>
-          <FlatButton label="List of Guest" primary={true} />
+          <FlatButton label="Reviews at Yelp"
+            href={url}
+            target="_blank"
+            backgroundColor="#e2e2e2"
+          />
+          <FlatButton label="List of Guest"
+            primary={true}
+            onTouchTap={ () => console.log('test!')}
+          />
           <FlatButton
+            secondary={true}
             label={labelText}
             disabled={!auth}
-            onClick={ () => this.onSubmit()}
-            secondary={true} />
+            onTouchTap={ () => this.onSubmit()}
+          />
         </CardActions>
       </Card>
     )
