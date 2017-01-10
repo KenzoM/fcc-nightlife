@@ -6,7 +6,7 @@ export default function(state = INITIAL, action){
   switch (action.type){
     case RECIEVE_YELP:
       const { payload } = action
-      return {...state, data: payload.businesses, isFetching: false}
+      return {...state, data: payload.businesses, isFetching: false, centerLocation: payload.region.center}
     case GET_YELP:
       return {...state, isFetching: true}
     case REMOVE_YELP:

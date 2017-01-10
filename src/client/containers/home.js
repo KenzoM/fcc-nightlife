@@ -4,6 +4,7 @@ import { reduxForm, Field, formValueSelector } from 'redux-form'
 import * as actions from '../actions/';
 import { Link } from 'react-router';
 import LoadingCircle from '../components/LoadingCircle';
+import GoogleMap from '../components/google-map';
 import YelpCard from './YelpCard';
 import MenuItem from 'material-ui/MenuItem';
 import { RadioButton } from 'material-ui/RadioButton';
@@ -22,12 +23,22 @@ class Home extends Component {
     super(props);
     this.state = {distanceSlider: 0}
     this.onSubmit = this.onSubmit.bind(this);
-    this.renderCards = this.renderCards.bind(this)
+    this.renderGoogleMap = this.renderGoogleMap.bind(this);
+    this.renderCards = this.renderCards.bind(this);
   }
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props;
     this.props.getYelp(city)
+  }
+
+  renderGoogleMap(){
+    const {centerCoordinates, yelpData} = this.props
+    return(
+      <GoogleMap
+        centerCoordinates={centerCoordinates}
+      />
+    )
   }
 
   renderCards({name, guests, display_phone, location, image_url, isCurrentUserReserved, snippet_text, id, url}){
@@ -61,7 +72,6 @@ class Home extends Component {
     };
     const { handleSubmit, pristine, reset, submitting, yelpData, userName } = this.props;
     //isFetching helps sync correctly to load loader-image while fetching data from Yelp
-
     return (
       <div>
         <h1>Welcome {userName || 'Guest'} !</h1>
@@ -90,6 +100,9 @@ class Home extends Component {
           </div>
         </form>
         <div className="my-container">
+          {yelpData.isFetching || yelpData.data.length === 0 ? <div></div> : this.renderGoogleMap()}
+        </div>
+        <div className="my-container">
           {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
         </div>
       </div>
@@ -105,6 +118,7 @@ Home = reduxForm({
 function mapStateToProps(state){
   return {
     yelpData: state.yelpData,
+    centerCoordinates: state.yelpData.centerLocation,
     isReserved: state.yelpData.isReserved,
     userName: state.auth.userName,
     userEmail: state.auth.email
