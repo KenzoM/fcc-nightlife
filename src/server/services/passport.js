@@ -8,6 +8,7 @@ const LocalStrategy = require('passport-local');
 // Local Strategy
 const localOptions = { usernameField: 'email'} // override localJWT default's usernameField
 const localLogin = new LocalStrategy(localOptions , function(email, password, done){
+  email = email.toLowerCase()
   // Verify this email and password, call done with user
   User.findOne({ email: email}, function(err, user){
     if (err) {return (done(err))}
