@@ -23,13 +23,6 @@ class Home extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.renderCards = this.renderCards.bind(this)
   }
-  componentDidMount(){
-    // const { yelpData } = this.props;
-    // if (yelpData.lastCity && yelpData.lastCity !== 'undefined'){
-    //   this.props.getYelp(yelpData.lastCity)
-    // }
-  }
-
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props;
@@ -37,7 +30,7 @@ class Home extends Component {
     this.props.getYelp(city)
   }
 
-  renderCards({name, display_phone, location, image_url, isCurrentUserReserved, snippet_text, id, url}){
+  renderCards({name, guests, display_phone, location, image_url, isCurrentUserReserved, snippet_text, id, url}){
     let address = location.address[0];
     const { yelpData } = this.props;
     if(!snippet_text){
@@ -56,6 +49,7 @@ class Home extends Component {
         display_phone={display_phone}
         url={url}
         city={yelpData.lastCity}
+        guests={guests}
         isCurrentUserReserved={isCurrentUserReserved}
         />
     )

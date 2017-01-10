@@ -13,7 +13,8 @@ class YelpCard extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.state = {open: false}
+    this.renderGuestLists = this.renderGuestLists.bind(this);
+    this.state = {open: false};
   }
 
   handleOpen(){
@@ -28,22 +29,31 @@ class YelpCard extends Component {
     const {clubID, userName, userEmail, city } = this.props
     this.props.updateGuestList(clubID, userName, userEmail, city)
   }
+  renderGuestLists(guestLists){
+    if (guestLists.length !== 0){
+      return(
+        <ul>
+          {guestLists.map( guest =>{
+            return <li key={guest}>{guest}</li>
+          })}
+        </ul>
+      )
+    } else{
+      return(
+        <div>No Guests at the moment</div>
+      )
+    }
+  }
   render(){
-    const { name, clubID, address, display_phone, image_url,
+    const { name, guests, clubID, address, display_phone, image_url,
       snippet_text, url, auth, userName, userEmail, isCurrentUserReserved, city } = this.props
     let labelText = isCurrentUserReserved ? 'Yes I am going!' : 'Going Tonight?';
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Ok!"
         primary={true}
         onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
+      />
     ];
     return(
       <div className="my-card">
@@ -61,7 +71,7 @@ class YelpCard extends Component {
               target="_blank"
               backgroundColor="#e2e2e2"
             />
-            <FlatButton label="List of Guest"
+            <FlatButton label="List of Guests"
               primary={true}
               onTouchTap={this.handleOpen}
             />
@@ -74,19 +84,19 @@ class YelpCard extends Component {
           </CardActions>
         </Card>
         <Dialog
-          title="Dialog With Actions"
+          title={`List of Guests at ${name}`}
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          The actions in this window were passed in as an array of React objects.
+          {this.renderGuestLists(guests)}
         </Dialog>
       </div>
-
     )
   }
 }
+// {guests.length !== 0 ? guests.map(this.renderGuestLists) : 'No Guests at the moment'}
 
 function mapStateToProps(state){
   return {
@@ -97,10 +107,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, actions)(YelpCard);
-
-// YelpCard = reduxForm({
-//   form: 'myYelpCard'
-// })(YelpCard)
-//
-//
-// export default YelpCard = connect(mapStateToProps, actions)(YelpCard)

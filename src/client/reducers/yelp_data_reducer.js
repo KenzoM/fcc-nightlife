@@ -6,6 +6,7 @@ export default function(state = INITIAL, action){
   switch (action.type){
     case RECIEVE_YELP:
       const { payload } = action
+      // console.log(payload)
       return {...state, data: payload.businesses, isFetching: false, isReserved: payload.currentUserReservations}
     case GET_YELP:
       return {...state, isFetching: true}

@@ -20,7 +20,7 @@ export function getYelp(city, update){
 
   //text for updating user what's going on
   let toastText = update ? 'Updating Your Reservation...' : `Searching for clubs in ${city}...`
-  
+
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
     //if logged in, update the current user's history search
@@ -36,23 +36,41 @@ export function getYelp(city, update){
     dispatch({
       type: GET_YELP
     })
+    //Once we retrieved data from YELP API, we do the following:
     request.then( ({data}) =>{
       // this will iterate each clubID to see if the current user is on the guest list RSVP
       let currentUserReservations = [];
+      // this will hold the guestlists for each club ID
+      let currentGuestLists = []
+
       let promisedClubs = data.businesses.map( club =>
         axios.get(`${ROOT_URL}/club/${currentEmail}/${club.id}`)
           .then( ({data}) => {
             currentUserReservations.push( Object.assign({}, club, data))
           })
-          .then( () => data.businesses = currentUserReservations )
       );
 
       Promise.all(promisedClubs).then(clubs => {
-        dispatch({ type: RECIEVE_YELP, payload: data})
-      }, failedClub => {
-        console.log('Error has happened')
-      });
+        //update data.businesses with information of user's own RSVP
 
+        data.businesses = currentUserReservations
+        let promisedGuestList = data.businesses.map( club =>
+          axios.get(`${ROOT_URL}/guestList/${club.id}`)
+            .then( ({data}) => {
+              currentGuestLists.push(Object.assign({}, club, data))
+            })
+        );
+        //when it finishes updating ALL of it, move on to the next Promise.all()
+        Promise.all(promisedGuestList).then( guestList =>{
+          //update data.businesses with information of club's guest List
+          data.businesses = currentGuestLists
+          dispatch({ type: RECIEVE_YELP, payload: data})
+        }, failedGuestList => {
+          console.log('Error has happened in GuestList')
+        })
+      }, failedClub => {
+        console.log('Error has happened in Club')
+      });
     })
     .catch(function (error) {
       console.log(error);

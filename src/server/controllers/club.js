@@ -10,15 +10,15 @@ exports.GuestLists = function(req, res, next){
     User.findOne({ email: userEmail}, function(err, existingUser){
       if(err) {console.error(err)}
       if (existingUser.clubs.includes(clubID)){
-        console.log('current user is RESERVED')
+        // console.log('current user is RESERVED')
         return res.send({"isCurrentUserReserved" : true})
       } else{
-        console.log('current user is NOT RESERVED')
+        // console.log('current user is NOT RESERVED')
         return res.send({"isCurrentUserReserved" : false})
       }
     })
   } else{
-    res.send({"message" : 'Soemthing something'})
+    res.send({"message" : 'user is not logged in'})
     next()
   }
 }
