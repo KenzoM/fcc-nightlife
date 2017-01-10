@@ -1,6 +1,7 @@
 export const GET_YELP = 'get_yelp'
 export const RECIEVE_YELP = 'recieve_yelp'
 export const REMOVE_YELP = 'remove_yelp'
+export const ERROR_YELP = 'error_yelp'
 export const LAST_CITY = 'last_city'
 
 export const UPDATE_GUEST = 'update_guest'

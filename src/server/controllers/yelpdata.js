@@ -31,5 +31,6 @@ exports.getData = function(req, res, next){
   })
   .catch(function (err) {
     console.error(err);
+    res.send(err.data)
   });
 }

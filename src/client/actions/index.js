@@ -2,7 +2,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:1234';
 import { browserHistory } from 'react-router';
 import { GET_YELP, RECIEVE_YELP,
-  REMOVE_YELP, LAST_CITY, AUTH_USER,
+  REMOVE_YELP, LAST_CITY, AUTH_USER, ERROR_YELP,
   UNAUTH_USER, TAB_INDEX, UPDATE_GUEST} from './types';
 
 export function changeTab(index){
@@ -72,8 +72,9 @@ export function getYelp(city, update){
         console.log('Error has happened in Club')
       });
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch( (error) => {
+      Materialize.toast('Sorry! No bars was found!', timeDelay)
+      dispatch({type: ERROR_YELP})
     });
   }
 }
