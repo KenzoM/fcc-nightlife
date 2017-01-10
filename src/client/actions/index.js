@@ -12,11 +12,15 @@ export function changeTab(index){
   })
 }
 
-export function getYelp(city){
+export function getYelp(city, update){
   const timeDelay = 2000;
   // request holds the information from Yelp API
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
   const currentEmail = localStorage.getItem('email')
+
+  //text for updating user what's going on
+  let toastText = update ? 'Updating Your Reservation...' : `Searching for clubs in ${city}...`
+  
   //Fetch the data and call another dispatch to indicate it received the data
   return (dispatch) => {
     //if logged in, update the current user's history search
@@ -28,7 +32,7 @@ export function getYelp(city){
     if(!city){
       return dispatch({type: REMOVE_YELP})
     }
-    Materialize.toast(`Searching for clubs in ${city}...`, timeDelay)
+    Materialize.toast(toastText, timeDelay)
     dispatch({
       type: GET_YELP
     })
@@ -61,7 +65,7 @@ export function updateGuestList(clubID, userName, userEmail, city ){
     // this simply updates the current user RSVP and dispatch getYelp
     axios.put(`${ROOT_URL}/club/${clubID}/${userName}/${userEmail}`)
       .then(response =>{
-        dispatch(getYelp(city))
+        dispatch(getYelp(city, true))
       })
       .catch(response =>{
         console.log(response)
