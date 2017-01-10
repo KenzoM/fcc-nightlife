@@ -21,8 +21,6 @@ exports.GuestLists = function(req, res, next){
     res.send({"message" : 'Soemthing something'})
     next()
   }
-
-
 }
 
 exports.UpdateGuestList = function(req, res, next){
@@ -31,7 +29,6 @@ exports.UpdateGuestList = function(req, res, next){
   const userEmail = req.params.userEmail;
 
   function updateClubSchema(){
-    console.log('testing~~~')
     return new Promise(function(resolve, reject){
       Club.findOne({ clubID: clubID}, function(err, existingClub){
         if (err) { return next(err) ;}
@@ -43,21 +40,21 @@ exports.UpdateGuestList = function(req, res, next){
             Club.findOneAndUpdate({clubID: clubID}, {$pull: {guests: userName}}, function(err, doc){
               if(err) {console.error(err)}
               resolve()
-              console.log(doc)
+              // console.log(doc)
               // return res.send({"message": "removed new guest"})
             })
 
-          } else{         //2) if the current userName doesnt exist, push it into guests aaray
+          } else{         //2) if the current userName doesnt exist, push it into guests array
             console.log('Push in guest')
             Club.findOneAndUpdate({clubID: clubID}, {$push: {guests: userName}}, function(err, doc){
               if(err) {console.error(err)}
               // if(!err) {return next(err)}
-              console.log(doc)
+              // console.log(doc)
               resolve()
             })
           }
           resolve()
-          return res.send({"message": "done"})
+          // return res.send({"message": "done"})
         }
         // If clubID does not exist, create and save clubID
         const club = new Club({
@@ -67,7 +64,7 @@ exports.UpdateGuestList = function(req, res, next){
 
         club.save(function(err, doc){
           if (err) {return next(err)}
-          console.log(doc)
+          // console.log(doc)
           resolve()
         })
       })
@@ -82,13 +79,17 @@ exports.UpdateGuestList = function(req, res, next){
         console.log('remove club in the user list')
         User.findOneAndUpdate({email: userEmail}, {$pull: {clubs: clubID}}, function(err, doc){
           if(err) {console.error(err)}
-          console.log(doc)
+          // console.log(doc)
+          // res.send({"message": "added club in user list"})
+          return res.send({"message": "removed club in user list"})
         })
       } else{
         console.log('add club in user list')
         User.findOneAndUpdate({email: userEmail}, {$push: {clubs: clubID}}, function(err, doc){
           if(err) {console.error(err)}
-          console.log(doc)
+          // console.log(doc)
+          // res.send({"message": "added club in user list"})
+          return res.send({"message": "added club in user list"})
         })
 
       }
