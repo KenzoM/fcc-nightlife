@@ -56,25 +56,32 @@ class Home extends Component {
   }
 
   render() {
+    const style = {
+      margin: 12,
+    };
     const { handleSubmit, pristine, reset, submitting, yelpData, userName } = this.props;
     //isFetching helps sync correctly to load loader-image while fetching data from Yelp
+
     return (
       <div>
         <h1>Welcome {userName || 'Guest'} !</h1>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div>
             <Field name="city"
+              hintText="Los Angeles"
               component={TextField}
               floatingLabelText="Enter Your City"/>
           </div>
           <div>
             <RaisedButton
+              style={style}
               label="Submit"
               type="submit"
               disabled={yelpData.isFetching}
               labelColor="white"
               backgroundColor="#26A69A"/>
             <RaisedButton
+              style={style}
               label="Clear"
               onTouchTap={reset}
               disabled={pristine || yelpData.isFetching}

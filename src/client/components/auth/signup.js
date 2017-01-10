@@ -26,7 +26,10 @@ class Signup extends Component {
     this.props.signupUser(props)
   }
   render(){
-    const { handleSubmit, submitting } = this.props;
+    const style = {
+      margin: 12,
+    };
+    const { handleSubmit, submitting, pristine, reset } = this.props;
     return(
       <div>
         <h1>Sign-up</h1>
@@ -61,6 +64,13 @@ class Signup extends Component {
               type="submit"
               labelColor="white"
               backgroundColor="#26A69A"/>
+            <RaisedButton
+              style={style}
+              label="Clear"
+              onTouchTap={reset}
+              disabled={pristine}
+              labelColor="white"
+              backgroundColor="#C15055"/>
           </div>
         </form>
       </div>

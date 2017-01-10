@@ -27,18 +27,17 @@ class Login extends Component {
     this.props.loginUser(props)
   }
   render(){
-    const { handleSubmit, submitting } = this.props;
-    const required = value => value == null ? 'Required' : undefined;
-    const email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email' : undefined;
-
+    const style = {
+      margin: 12,
+    };
+    const { handleSubmit, submitting, reset, pristine } = this.props;
     return(
       <div>
         <h1>Login</h1>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <div>
             <Field name="email"
-              hintText="Enter Your Email"
-              floatingLabelText="Name"
+              floatingLabelText="Enter Your Email"
               component={TextField}
               ref="name" withRef
               type="text"/>
@@ -55,6 +54,13 @@ class Login extends Component {
               type="submit"
               labelColor="white"
               backgroundColor="#26A69A"/>
+            <RaisedButton
+              style={style}
+              label="Clear"
+              onTouchTap={reset}
+              disabled={pristine}
+              labelColor="white"
+              backgroundColor="#C15055"/>
           </div>
         </form>
       </div>
