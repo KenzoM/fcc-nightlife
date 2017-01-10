@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field,  reduxForm } from 'redux-form';
 const  { DOM: { input, select, textarea } } = React;
+// import TextField from 'material-ui/TextField';
 import { Link } from 'react-router';
 import * as actions from '../../actions/';
+import {
+  AutoComplete,
+  Checkbox,
+  DatePicker,
+  TimePicker,
+  RadioButtonGroup,
+  SelectField,
+  Slider,
+  TextField,
+  Toggle
+} from 'redux-form-material-ui'
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Login extends Component {
   constructor(props){
@@ -11,18 +24,38 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
   onSubmit(props){
-    // console.log(props)
     this.props.loginUser(props)
   }
   render(){
     const { handleSubmit, submitting } = this.props;
+    const required = value => value == null ? 'Required' : undefined;
+    const email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email' : undefined;
 
     return(
-      <div className="form-test">
+      <div>
+        <h1>Login</h1>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <Field name="email" label="Enter your Email" component={renderField} type="text"/>
-          <Field name="password" label="Enter a Password" component={renderField} type="password"/>
-          <button className="btn" type="submit">Submit</button>
+          <div>
+            <Field name="email"
+              hintText="Enter Your Email"
+              floatingLabelText="Name"
+              component={TextField}
+              ref="name" withRef
+              type="text"/>
+          </div>
+          <div>
+            <Field name="password"
+              floatingLabelText="Enter a Password"
+              component={TextField}
+              type="password"/>
+            </div>
+          <div>
+            <RaisedButton
+              label="Submit"
+              type="submit"
+              labelColor="white"
+              backgroundColor="#26A69A"/>
+          </div>
         </form>
       </div>
     )

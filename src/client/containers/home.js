@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import * as actions from '../actions/';
 import { Link } from 'react-router';
-import LoadingCircle from '../components/LoadingCircle'
-import YelpCard from './YelpCard'
-import MenuItem from 'material-ui/MenuItem'
-import { RadioButton } from 'material-ui/RadioButton'
+import LoadingCircle from '../components/LoadingCircle';
+import YelpCard from './YelpCard';
+import MenuItem from 'material-ui/MenuItem';
+import { RadioButton } from 'material-ui/RadioButton';
 import {
   Checkbox,
   RadioButtonGroup,
@@ -14,7 +14,8 @@ import {
   TextField,
   Toggle,
   Slider
-} from 'redux-form-material-ui'
+} from 'redux-form-material-ui';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Home extends Component {
   constructor(props){
@@ -26,7 +27,6 @@ class Home extends Component {
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props;
-    // const { userEmail } = this.props
     this.props.getYelp(city)
   }
 
@@ -62,10 +62,24 @@ class Home extends Component {
       <div>
         <h1>Welcome {userName || 'Guest'} !</h1>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field name="city" component={TextField} hintText="Enter Your City"/>
           <div>
-            <button type="submit" disabled={yelpData.isFetching}>Submit</button>
-            <button type="button" disabled={pristine || yelpData.isFetching} onTouchTap={reset}>Clear</button>
+            <Field name="city"
+              component={TextField}
+              floatingLabelText="Enter Your City"/>
+          </div>
+          <div>
+            <RaisedButton
+              label="Submit"
+              type="submit"
+              disabled={yelpData.isFetching}
+              labelColor="white"
+              backgroundColor="#26A69A"/>
+            <RaisedButton
+              label="Clear"
+              onTouchTap={reset}
+              disabled={pristine || yelpData.isFetching}
+              labelColor="white"
+              backgroundColor="#C15055"/>
           </div>
         </form>
         <div className="my-container">

@@ -4,6 +4,18 @@ import { Field,  reduxForm } from 'redux-form';
 const  { DOM: { input, select, textarea } } = React;
 import { Link } from 'react-router';
 import * as actions from '../../actions/';
+import {
+  AutoComplete,
+  Checkbox,
+  DatePicker,
+  TimePicker,
+  RadioButtonGroup,
+  SelectField,
+  Slider,
+  TextField,
+  Toggle
+} from 'redux-form-material-ui'
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Signup extends Component {
   constructor(props){
@@ -11,19 +23,45 @@ class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
   onSubmit(props){
-    // console.log(props)
     this.props.signupUser(props)
   }
   render(){
     const { handleSubmit, submitting } = this.props;
     return(
-      <div className="form-test">
+      <div>
+        <h1>Sign-up</h1>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <Field name="userName" label="Enter a Username" component={renderField} type="text"/>
-          <Field name="email" label="Enter your Email" component={renderField} type="text"/>
-          <Field name="password" label="Enter a Password" component={renderField} type="password"/>
-          <Field name="passwordConfirm" label="Confirm Password" component={renderField} type="password"/>
-          <button type="submit">Submit</button>
+          <div>
+            <Field name="userName"
+              floatingLabelText="Enter a Username"
+              component={TextField}
+              type="text"/>
+          </div>
+          <div>
+            <Field name="email"
+              floatingLabelText="Enter your Email"
+              component={TextField}
+              type="text"/>
+          </div>
+          <div>
+            <Field name="password"
+              floatingLabelText="Enter a Password"
+              component={TextField}
+              type="password"/>
+          </div>
+          <div>
+            <Field name="passwordConfirm"
+              floatingLabelText="Confirm Password"
+              component={TextField}
+              type="password"/>
+          </div>
+          <div>
+            <RaisedButton
+              label="Submit"
+              type="submit"
+              labelColor="white"
+              backgroundColor="#26A69A"/>
+          </div>
         </form>
       </div>
     )
