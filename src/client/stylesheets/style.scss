@@ -22,7 +22,7 @@ footer {
 .yelpCard-row{
   width: 50%;
   height: 70vh;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   flex-wrap: wrap;
 }
@@ -39,7 +39,8 @@ footer {
 }
 
 .my-card{
-  width: 27%;
+  width: 31%;
+  padding: 5px;
 }
 
 .form-test{

@@ -24,6 +24,7 @@ class Home extends Component {
     this.state = {distanceSlider: 0}
     this.onSubmit = this.onSubmit.bind(this);
     this.renderGoogleMap = this.renderGoogleMap.bind(this);
+    this.renderYelpRow = this.renderYelpRow.bind(this);
     this.renderCards = this.renderCards.bind(this);
   }
   onSubmit(props){
@@ -39,6 +40,15 @@ class Home extends Component {
         centerCoordinates={centerCoordinates}
         yelpData={yelpData}
       />
+    )
+  }
+
+  renderYelpRow(){
+    const {yelpData} = this.props;
+    return(
+      <div className="yelpCard-row">
+        {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
+      </div>
     )
   }
 
@@ -101,9 +111,7 @@ class Home extends Component {
           </div>
         </form>
         <div className="my-container">
-          <div className="yelpCard-row">
-            {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
-          </div>
+          {this.renderYelpRow()}
           <div className="google-map-row">
             {yelpData.isFetching || yelpData.data.length === 0 ? <div></div> : this.renderGoogleMap()}
           </div>

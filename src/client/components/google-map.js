@@ -28,6 +28,7 @@ export default class MyGoogleMap extends Component {
   render() {
     const {centerCoordinates, yelpData} = this.props; //props from home.js container
     let center = {lat: centerCoordinates.latitude, lng: centerCoordinates.longitude}
+    console.log(center, 'this is center')
     return (
       <div className="google-map">
         <GoogleMap

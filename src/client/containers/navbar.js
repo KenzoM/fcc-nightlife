@@ -50,7 +50,7 @@ class Navbar extends Component {
     return (
       //containerElement solution was found in stackoverflow to corporate
       //React-Router and Material-UI
-      <div>
+      <div className="nav-bar">
         <AppBar showMenuIconButton={false} style={styles.appBar} >
           <Tabs style={styles.tabs} value={tabIndex} initialSelectedIndex={tabIndex}>
             <Tab label='Home' value={0} containerElement={<Link to="/" />} />

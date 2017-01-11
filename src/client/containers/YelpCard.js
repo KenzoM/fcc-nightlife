@@ -48,6 +48,9 @@ class YelpCard extends Component {
     const { name, guests, clubID, address, display_phone, image_url,
       snippet_text, url, auth, userName, userEmail, isCurrentUserReserved, city } = this.props
     let labelText = isCurrentUserReserved ? 'Yes I am going!' : 'Going Tonight?';
+    const titleStyle = {
+      fontSize: '17px',
+    };
     const actions = [
       <FlatButton
         label="Ok!"
@@ -58,7 +61,7 @@ class YelpCard extends Component {
     return(
       <div className="my-card">
         <Card>
-          <CardMedia overlay={<CardTitle title={name} />}>
+          <CardMedia overlay={<CardTitle title={name} titleStyle={titleStyle} />}>
             <img src={image_url} />
           </CardMedia>
           <CardTitle title={address} subtitle={display_phone} />
