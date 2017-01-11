@@ -11,8 +11,18 @@ export default class MyGoogleMap extends Component {
   renderMarkers({id, location, name}){
     let clubCoordinate = location.coordinate;
     return(
-      <MyGreatPlace key={id} lat={clubCoordinate.latitude} lng={clubCoordinate.longitude} text={name} />
+      <MyGreatPlace key={id} lat={clubCoordinate.latitude} lng={clubCoordinate.longitude} />
     )
+  }
+
+  _onChildMouseEnter = (key, childProps) => {
+    console.log(key, 'this is key')
+    console.log(childProps, 'this is childProps')
+    // const markerId = childProps.marker.get('id');
+    // const index = this.props.markers.findIndex(m => m.get('id') === markerId);
+    // if (this.props.onMarkerHover) {
+    //   this.props.onMarkerHover(index);
+    // }
   }
 
   render() {
@@ -25,7 +35,7 @@ export default class MyGoogleMap extends Component {
             key: 'AIzaSyACO9SDgAwetIO3Zxl3tXQGMR90sCrhQHM',
             language: 'en'
           }}
-          onChildMouseEnter={() =>console.log(this.props)}
+          onChildMouseEnter={this._onChildMouseEnter}
           onChildMouseLeave={() =>console.log('leave mouse')}
           defaultCenter={center}
           defaultZoom={14}

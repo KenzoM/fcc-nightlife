@@ -33,8 +33,8 @@ class Login extends Component {
     const { handleSubmit, submitting, reset, pristine } = this.props;
     return(
       <div>
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <h1 className="title">Login</h1>
+        <form className="center-form" onSubmit={handleSubmit(this.onSubmit)}>
           <div>
             <Field name="email"
               floatingLabelText="Enter Your Email"

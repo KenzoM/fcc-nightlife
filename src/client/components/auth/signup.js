@@ -32,8 +32,8 @@ class Signup extends Component {
     const { handleSubmit, submitting, pristine, reset } = this.props;
     return(
       <div>
-        <h1>Sign-up</h1>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <h1 className="title">Sign-up</h1>
+        <form className="center-form" onSubmit={handleSubmit(this.onSubmit)}>
           <div>
             <Field name="userName"
               floatingLabelText="Enter a Username"
@@ -73,6 +73,13 @@ class Signup extends Component {
               backgroundColor="#C15055"/>
           </div>
         </form>
+        <div className="center-form">
+          This app only requires a valid email and uses JWT Tokens (no cookies...yay!)
+          <br></br>
+          If you do not want to use your private email, no problem!
+          <br></br>
+          You can use <a href="http://www.throwawaymail.com/">disposable email!</a> Just make sure you remember your password ;-)
+        </div>
       </div>
     )
   }

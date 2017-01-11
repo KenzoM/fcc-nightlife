@@ -10,7 +10,7 @@ const greatPlaceStyle = {
   height: '100%',
   width: '100%',
 
-  border: '5px solid #f44336',
+  border: '3px solid #f44336',
   backgroundColor: 'white',
   textAlign: 'center',
   color: '#3f51b5',

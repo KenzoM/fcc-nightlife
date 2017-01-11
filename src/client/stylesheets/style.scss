@@ -14,13 +14,32 @@ footer {
 }
 
 .my-container{
-  width: 100%;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.yelpCard-row{
+  width: 50%;
+  height: 70vh;
+  overflow: scroll;
   display: flex;
   flex-wrap: wrap;
 }
+.google-map-row{
+  width: 50%;
+}
+
+.title{
+  text-align: center;
+}
+
+.center-form{
+  text-align: center;
+}
 
 .my-card{
-  width: 25%;
+  width: 27%;
 }
 
 .form-test{

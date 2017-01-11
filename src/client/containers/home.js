@@ -34,7 +34,6 @@ class Home extends Component {
 
   renderGoogleMap(){
     const {centerCoordinates, yelpData} = this.props
-    console.log(centerCoordinates)
     return(
       <GoogleMap
         centerCoordinates={centerCoordinates}
@@ -76,13 +75,13 @@ class Home extends Component {
     //isFetching helps sync correctly to load loader-image while fetching data from Yelp
     return (
       <div>
-        <h1>Welcome {userName || 'Guest'} !</h1>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h1 className="title">Welcome {userName || 'Guest'} !</h1>
+        <form className="center-form" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div>
             <Field name="city"
-              hintText="Los Angeles"
+              hintText="Los Angeles Downtown"
               component={TextField}
-              floatingLabelText="Enter Your City"/>
+              floatingLabelText="Enter Your City or Address"/>
           </div>
           <div>
             <RaisedButton
@@ -102,10 +101,12 @@ class Home extends Component {
           </div>
         </form>
         <div className="my-container">
-          {yelpData.isFetching || yelpData.data.length === 0 ? <div></div> : this.renderGoogleMap()}
-        </div>
-        <div className="my-container">
-          {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
+          <div className="yelpCard-row">
+            {yelpData.isFetching ? (<LoadingCircle />) : (yelpData.data.map(this.renderCards))}
+          </div>
+          <div className="google-map-row">
+            {yelpData.isFetching || yelpData.data.length === 0 ? <div></div> : this.renderGoogleMap()}
+          </div>
         </div>
       </div>
     )
