@@ -34,9 +34,11 @@ class Home extends Component {
 
   renderGoogleMap(){
     const {centerCoordinates, yelpData} = this.props
+    console.log(centerCoordinates)
     return(
       <GoogleMap
         centerCoordinates={centerCoordinates}
+        yelpData={yelpData}
       />
     )
   }
