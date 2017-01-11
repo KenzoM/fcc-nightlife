@@ -9,7 +9,8 @@ export default class MyGoogleMap extends Component {
     this.renderMarkers = this.renderMarkers.bind(this);
   }
   renderMarkers({id, location, name}){
-    let clubCoordinate = location.coordinate;
+    // If Yelp API doesnt provide a coordinate for a club, default to lat and long to 0
+    let clubCoordinate = location.coordinate || {latitude: 0, longitude: 0};
     return(
       <MyGreatPlace key={id} lat={clubCoordinate.latitude} lng={clubCoordinate.longitude} />
     )
@@ -28,7 +29,6 @@ export default class MyGoogleMap extends Component {
   render() {
     const {centerCoordinates, yelpData} = this.props; //props from home.js container
     let center = {lat: centerCoordinates.latitude, lng: centerCoordinates.longitude}
-    console.log(center, 'this is center')
     return (
       <div className="google-map">
         <GoogleMap
@@ -41,7 +41,7 @@ export default class MyGoogleMap extends Component {
           defaultCenter={center}
           defaultZoom={14}
         >
-        <MyGreatPlace lat={centerCoordinates.latitude} lng={centerCoordinates.longitude} text={'My Location'} />
+        <MyGreatPlace lat={center.lat} lng={center.lng} text={'My Location'} />
         {yelpData.data.map(this.renderMarkers)}
        </GoogleMap>
       </div>
