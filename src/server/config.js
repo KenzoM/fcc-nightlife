@@ -4,4 +4,5 @@ module.exports ={
   consumer_secret: 'uiRR3XetMsz4QKxOfrOMMovhjag',
   token: '8ySZ933jN55vudN21_ZTvLYIYEXq-_ar',
   token_secret: 'wKn5_Ykn5KIOS716leP76zhMUGs',
+  googleAPI: 'AIzaSyACO9SDgAwetIO3Zxl3tXQGMR90sCrhQHM'
 }

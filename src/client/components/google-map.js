@@ -3,6 +3,8 @@ import React, {PropTypes, Component} from 'react';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './my_great_place';
 
+const googleAPI = process.env.googleAPI || require('../../../src/server/config').googleAPI;
+
 export default class MyGoogleMap extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ export default class MyGoogleMap extends Component {
       <div className="google-map">
         <GoogleMap
           bootstrapURLKeys={{
-            key: 'AIzaSyACO9SDgAwetIO3Zxl3tXQGMR90sCrhQHM',
+            key: googleAPI,
             language: 'en'
           }}
           onChildMouseEnter={this._onChildMouseEnter}
