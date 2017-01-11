@@ -146,3 +146,11 @@ export function signoutUser(){
     dispatch({type: UNAUTH_USER})
   }
 }
+
+export function resetForm(){
+  return (dispatch) =>{
+    dispatch({
+      type: REMOVE_YELP
+    })
+  }
+}

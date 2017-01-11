@@ -26,6 +26,7 @@ class Home extends Component {
     this.renderGoogleMap = this.renderGoogleMap.bind(this);
     this.renderYelpRow = this.renderYelpRow.bind(this);
     this.renderCards = this.renderCards.bind(this);
+    this.onHandleResetButton = this.onHandleResetButton.bind(this);
   }
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
@@ -77,15 +78,23 @@ class Home extends Component {
     )
   }
 
+  onHandleResetButton(){
+    const { reset } = this.props;
+    reset()
+    this.props.resetForm();
+  }
+
   render() {
     const style = {
       margin: 12,
     };
     const { handleSubmit, pristine, reset, submitting, yelpData, userName } = this.props;
     //isFetching helps sync correctly to load loader-image while fetching data from Yelp
+    let subTitleText = yelpData.lastCity ? `Bars in ${yelpData.lastCity}` : 'Where you would like to see bars at?'
     return (
       <div>
         <h1 className="title">Welcome {userName || 'Guest'} !</h1>
+        <h4 className="title">{subTitleText}</h4>
         <form className="center-form" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div>
             <Field name="city"
@@ -104,8 +113,8 @@ class Home extends Component {
             <RaisedButton
               style={style}
               label="Clear"
-              onTouchTap={reset}
-              disabled={pristine || yelpData.isFetching}
+              onTouchTap={ () => this.onHandleResetButton()}
+              disabled={yelpData.isFetching}
               labelColor="white"
               backgroundColor="#C15055"/>
           </div>

@@ -69,7 +69,7 @@ class YelpCard extends Component {
             {snippet_text}
           </CardText>
           <CardActions>
-            <FlatButton label="Reviews at Yelp"
+            <FlatButton label="Reviews"
               href={url}
               target="_blank"
               backgroundColor="#e2e2e2"
