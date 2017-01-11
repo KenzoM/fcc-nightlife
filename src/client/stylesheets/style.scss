@@ -62,6 +62,27 @@ footer {
   z-index: 10000;
 }
 
+@media only screen and (max-width: 500px) {
+  .yelpCard-row{
+    width: 100%;
+    overflow: inherit;
+  }
+  .my-card{
+    width: 45%;
+    padding: 5px;
+  }
+  .google-map-row{
+    visibility: hidden;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 1279px) {
+  .my-card{
+    width: 44%;
+    padding: 3px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   #toast-container {
     min-width: 100%;
