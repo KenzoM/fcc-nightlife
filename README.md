@@ -35,9 +35,6 @@ In essence, this app is architectured MERN stack. It utilizes
 4. `npm run dev` for development environment
 5. `npm start` for production environment
 
-End with an example of getting some data out of the system or using it for a little demo
-
-
 ## Built With
 
 * [Material-UI](https://github.com/callemall/material-ui) - The css framework used
