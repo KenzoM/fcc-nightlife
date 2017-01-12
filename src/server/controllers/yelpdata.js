@@ -2,10 +2,10 @@ const path = require('path');
 var Yelp = require('yelp');
 
 //API KEY for Yelp
-const consumer_key = require('../config').consumer_key;
-const consumer_secret = require('../config').consumer_secret;
-const token = require('../config').token;
-const token_secret = require('../config').token_secret;
+const consumer_key = process.env.CONSUMER_KEY || require('../config').consumer_key;
+const consumer_secret = process.env.CONSUMER_SECRET || require('../config').consumer_secret;
+const token = process.env.TOKEN || require('../config').token;
+const token_secret = process.env.TOKEN_SECRET || require('../config').token_secret;
 
 const yelp = new Yelp({
   consumer_key: consumer_key,

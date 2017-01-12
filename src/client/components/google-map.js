@@ -3,7 +3,7 @@ import React, {PropTypes, Component} from 'react';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './Markers';
 
-const googleAPI = process.env.googleAPI || require('../../../src/server/config').googleAPI;
+const googleAPI = process.env.GOOGLEAPI || require('../../../src/server/config').googleAPI;
 
 export default class MyGoogleMap extends Component {
   constructor(props) {
