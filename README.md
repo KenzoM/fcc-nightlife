@@ -19,6 +19,14 @@ It meets the following criteria
 
 This app was made possible by [Yelp's API](https://www.yelp.com/developers/v2/manage_api_keys)
 
+### Prerequisites
+
+In essence, this app is architectured MERN stack. It utilizes
+- `MongoDB` for handling models
+- `Express.js`  is for handling app's routing
+- `React` for handling UI front-end aspects
+- `Node.js` handles the server side for the application
+
 ### Installing
 
 1. Clone the repository
