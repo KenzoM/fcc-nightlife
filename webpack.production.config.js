@@ -1,8 +1,9 @@
 var path = require('path')
 var webpack = require('webpack');
+var WriteFilePlugin = require('write-file-webpack-plugin')
 
-var WriteFilePlugin = require('write-file-webpack-plugin');
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './src/client/index.js'
   ],
@@ -23,11 +24,16 @@ module.exports = {
       include: path.join(__dirname, 'src')
     }]
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify("production")
+      }
+    }),
+    new WriteFilePlugin()
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
-  }
 };
