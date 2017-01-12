@@ -47,10 +47,14 @@ class YelpCard extends Component {
   render(){
     const { name, guests, clubID, address, display_phone, image_url,
       snippet_text, url, auth, userName, userEmail, isCurrentUserReserved, city } = this.props
-    let labelText = isCurrentUserReserved ? 'Yes I am going!' : 'Going Tonight?';
+    let labelTextConfirmation = isCurrentUserReserved ? 'Confirmed!' : 'Going Tonight?';
+    let confirmLabelBtnClass = isCurrentUserReserved? 'confirmation-btn' : ''
     const titleStyle = {
       fontSize: '17px',
     };
+    const subtitleColorStyle = {
+      color: '#bcbcbc',
+    }
     const actions = [
       <FlatButton
         label="Ok!"
@@ -61,7 +65,7 @@ class YelpCard extends Component {
     return(
       <div className="my-card">
         <Card>
-          <CardMedia overlay={<CardTitle title={address} titleStyle={titleStyle} />}>
+          <CardMedia overlay={<CardTitle title={address} titleStyle={titleStyle} subtitle={`Total Guests: ${guests.length}`} subtitleStyle={subtitleColorStyle} />}>
             <img src={image_url} />
           </CardMedia>
           <CardTitle title={name} subtitle={display_phone} />
@@ -79,8 +83,9 @@ class YelpCard extends Component {
               onTouchTap={this.handleOpen}
             />
             <FlatButton
+              className={confirmLabelBtnClass}
               secondary={true}
-              label={labelText}
+              label={labelTextConfirmation}
               disabled={!auth}
               onTouchTap={ () => this.onSubmit()}
             />

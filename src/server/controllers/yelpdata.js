@@ -14,13 +14,15 @@ const yelp = new Yelp({
   token_secret: token_secret,
 });
 
-
+// More info on Yelp API Search
+// https://www.yelp.com/developers/documentation/v2/search_api
 exports.getData = function(req, res, next){
   let city = req.params.city;
   yelp.search({
     term: 'clubs',
     location: city,
-    category_filter: 'bars'
+    category_filter: 'bars',
+    sort: 1
    })
   .then(function (data) {
     res.send(data)

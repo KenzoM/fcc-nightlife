@@ -75,8 +75,13 @@ footer {
   padding: 5px;
 }
 
-.form-test{
-  text-align: center;
+.confirmation-btn{
+  background: #26A69A !important;
+  color: white !important;
+  transition: background 0.3s ease-out !important;
+  &:hover{
+    background: #2fd2c3 !important;
+  }
 }
 
 .google-map{

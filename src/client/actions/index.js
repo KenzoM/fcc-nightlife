@@ -19,7 +19,7 @@ export function getYelp(city, update){
   const request = axios.get(`${ROOT_URL}/yelp/${city}`);
   const currentEmail = localStorage.getItem('email')
 
-  //text for updating user what's going on
+  // alert for updating user what's going on
   let toastText = update ? 'Updating Your Reservation...' : `Searching for clubs in ${city}...`
 
   //Fetch the data and call another dispatch to indicate it received the data
