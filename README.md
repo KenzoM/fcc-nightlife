@@ -1,5 +1,5 @@
 # NightLife Coordination App
-A single-web-page app that utilizes `React` and `Node.js` to allow users search local bars near their desired area.
+A single-web-page app that utilizes `React`/`Redux` and `Node.js` to allow users search local bars near their desired area.
 
 ## Getting Started
 
