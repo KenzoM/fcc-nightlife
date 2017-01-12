@@ -16,7 +16,7 @@ exports.signin = function(req, res, next){
 
 exports.signup = function(req, res, next){
   const userName = req.body.userName
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
 
   if (!email || !password){
