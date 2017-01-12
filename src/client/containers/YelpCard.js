@@ -61,10 +61,10 @@ class YelpCard extends Component {
     return(
       <div className="my-card">
         <Card>
-          <CardMedia overlay={<CardTitle title={name} titleStyle={titleStyle} />}>
+          <CardMedia overlay={<CardTitle title={address} titleStyle={titleStyle} />}>
             <img src={image_url} />
           </CardMedia>
-          <CardTitle title={address} subtitle={display_phone} />
+          <CardTitle title={name} subtitle={display_phone} />
           <CardText>
             {snippet_text}
           </CardText>
