@@ -3,6 +3,8 @@ A single-web-page app that utilizes `React` and `Node.js` to allow users search 
 
 ## Getting Started
 
+[Live Demo](https://night-app-life-app-fcc.herokuapp.com/)
+
 The app is based on one of [FreeCodeCamp's challenges](https://www.freecodecamp.com/challenges/build-a-nightlife-coordination-app).
 
 It meets the following criteria
