@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "",
   "scripts": {
-    "postinstall": "node deploy",
+    "postinstall": "node deploy.js",
     "start": "node src/server/index.js ",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --require ignore-styles  --recursive ./test",
     "test:watch": "npm run test -- --watch",
