@@ -1,6 +1,6 @@
 import axios from 'axios';
-// const ROOT_URL = 'http://localhost:1234';
-const ROOT_URL = 'https://night-app-life-app-fcc.herokuapp.com'
+// const ROOT_URL = 'http://localhost:1234'; uncomment here for using locally
+const ROOT_URL = 'https://night-app-life-app-fcc.herokuapp.com' //un comment here for Heroku enviroment
 import { browserHistory } from 'react-router';
 import { GET_YELP, RECIEVE_YELP,
   REMOVE_YELP, LAST_CITY, AUTH_USER, ERROR_YELP,
