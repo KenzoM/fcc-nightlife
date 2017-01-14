@@ -22,7 +22,7 @@ This app was made possible by [Yelp's API](https://www.yelp.com/developers/v2/ma
 ### Prerequisites
 
 In essence, this app is architectured MERN stack. It utilizes
-- `MongoDB` for handling models
+- `MongoDB` for handling models including Users and Clubs
 - `Express.js`  is for handling app's routing
 - `React` for handling UI front-end aspects
 - `Node.js` handles the server side for the application
@@ -32,8 +32,12 @@ In essence, this app is architectured MERN stack. It utilizes
 1. Clone the repository
 2. `npm install`
 3. Run your local mongo via terminal:  `mongod`
-4. `npm run dev` for development environment
-5. `npm start` for production environment
+4. Go to `src/actions/index` and comment the following line: `const ROOT_URL = 'https://night-app-life-app-fcc.herokuapp.com'` and uncomment `// const ROOT_URL = 'http://localhost:1234'; uncomment here for using locally
+`
+In doing so, the app will use its routing in the local environment, `localhost`
+
+5. `npm run dev` for development environment
+6. `npm start` for production environment
 
 ## Built With
 
