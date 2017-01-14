@@ -28,6 +28,11 @@ class Home extends Component {
     this.renderCards = this.renderCards.bind(this);
     this.onHandleResetButton = this.onHandleResetButton.bind(this);
   }
+
+  componentDidMount(){
+    //Lets get google API
+    this.props.getGoogleAPI()
+  }
   onSubmit(props){
     // extract the value city from Redux-form and pass it to Action-Creator
     const { city } = props;
@@ -35,11 +40,12 @@ class Home extends Component {
   }
 
   renderGoogleMap(){
-    const {centerCoordinates, yelpData} = this.props
+    const {centerCoordinates, yelpData, googleAPI} = this.props
     return(
       <GoogleMap
         centerCoordinates={centerCoordinates}
         yelpData={yelpData}
+        googleAPI={googleAPI}
       />
     )
   }
@@ -141,7 +147,8 @@ function mapStateToProps(state){
     centerCoordinates: state.yelpData.centerLocation,
     isReserved: state.yelpData.isReserved,
     userName: state.auth.userName,
-    userEmail: state.auth.email
+    userEmail: state.auth.email,
+    googleAPI: state.googleAPI.googleAPI
   }
 }
 

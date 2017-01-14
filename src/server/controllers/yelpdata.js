@@ -1,4 +1,3 @@
-const path = require('path');
 var Yelp = require('yelp');
 
 //API KEY for Yelp

@@ -1,3 +1,4 @@
+export const GOOGLE_API = 'google_api'
 export const GET_YELP = 'get_yelp'
 export const RECIEVE_YELP = 'recieve_yelp'
 export const REMOVE_YELP = 'remove_yelp'

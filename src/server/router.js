@@ -1,5 +1,6 @@
 const path = require('path');
 
+const GoogleAPI = require('./controllers/GoogleAPI')
 const YelpData = require('./controllers/yelpdata')
 const User = require('./controllers/user')
 const Club = require('./controllers/club')
@@ -18,6 +19,9 @@ module.exports = function(app){
 
   //Responsible of collecting data from Yelp API
   app.get('/yelp/:city', YelpData.getData)
+
+  //Responsible of providing Google API to client side, without having it exposed
+  app.get('/googleapi', GoogleAPI.getAPI)
 
   //Responsible of updating user's last search history
   app.put('/user/:email/:city', User.UpdateHistorySearch)

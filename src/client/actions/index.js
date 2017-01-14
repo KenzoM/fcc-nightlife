@@ -1,8 +1,8 @@
 import axios from 'axios';
-// const ROOT_URL = 'http://localhost:1234'; //uncomment here for using locally
-const ROOT_URL = 'https://night-app-life-app-fcc.herokuapp.com' //un comment here for Heroku enviroment
+const ROOT_URL = 'http://localhost:1234'; //uncomment here for using locally
+// const ROOT_URL = 'https://night-app-life-app-fcc.herokuapp.com' //un comment here for Heroku enviroment
 import { browserHistory } from 'react-router';
-import { GET_YELP, RECIEVE_YELP,
+import {GOOGLE_API, GET_YELP, RECIEVE_YELP,
   REMOVE_YELP, LAST_CITY, AUTH_USER, ERROR_YELP,
   UNAUTH_USER, TAB_INDEX, UPDATE_GUEST} from './types';
 
@@ -11,6 +11,15 @@ export function changeTab(index){
     type: TAB_INDEX,
     payload: index
   })
+}
+
+export function getGoogleAPI(){
+  const request = axios.get(`${ROOT_URL}/googleapi`);
+  return (dispatch) => {
+    request.then( ({data}) => {
+      dispatch({type: GOOGLE_API, payload: data})
+    })
+  }
 }
 
 export function getYelp(city, update){
