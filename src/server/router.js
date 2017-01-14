@@ -1,10 +1,5 @@
 const path = require('path');
 
-const consumer_key = require('./config').consumer_key;
-const consumer_secret = require('./config').consumer_secret;
-const token = require('./config').token;
-const token_secret = require('./config').token_secret;
-
 const YelpData = require('./controllers/yelpdata')
 const User = require('./controllers/user')
 const Club = require('./controllers/club')
@@ -21,7 +16,7 @@ const requireSignIn = passport.authenticate('local', { session: false });
 
 module.exports = function(app){
 
-  //Responsible of collecting YelpData's
+  //Responsible of collecting data from Yelp API
   app.get('/yelp/:city', YelpData.getData)
 
   //Responsible of updating user's last search history
@@ -33,11 +28,6 @@ module.exports = function(app){
 
   //Responsible of retriving current guestList in particular clubs
   app.get('/club/:email/:clubID', Club.GuestLists )
-
-  //Responsible of adding guests in particular clubs
-  // app.post('/club/:email:city', function(req, res, next){
-  //
-  // })
 
   //Responsible of retrieving guestList for each particular club
   app.get('/guestList/:clubID', GuestList.getGuestLists)
