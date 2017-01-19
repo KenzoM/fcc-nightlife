@@ -152,7 +152,7 @@ export function signoutUser(){
     localStorage.removeItem('userName')
     localStorage.removeItem('email')
     browserHistory.push('/')
-    Materialize.toast(`See You Next Time!`, timeDelay)
+    Materialize.toast('See You Next Time!', timeDelay)
     dispatch({type: UNAUTH_USER})
   }
 }

@@ -88,24 +88,24 @@ class Signup extends Component {
 const validate = values => {
   const errors = {};
   if (!values.userName){
-    errors.userName = "Please enter a username"
+    errors.userName = 'Please enter a username'
   }
 
   if(!values.email){
-    errors.email = "Please enter an email"
+    errors.email = 'Please enter an email'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
   if (!values.password){
-    errors.password = "Please enter an password"
+    errors.password = 'Please enter an password'
   }
   if (!values.passwordConfirm){
-    errors.passwordConfirm = "Please confirm your password"
+    errors.passwordConfirm = 'Please confirm your password'
   }
 
   if (values.password !== values.passwordConfirm){
-    errors.password = "Password must match!"
+    errors.password = 'Password must match!'
   }
 
   return errors;

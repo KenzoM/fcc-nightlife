@@ -11,14 +11,14 @@ exports.GuestLists = function(req, res, next){
       if(err) {console.error(err)}
       if (existingUser.clubs.includes(clubID)){
         // console.log('current user is RESERVED')
-        return res.send({"isCurrentUserReserved" : true})
+        return res.send({'isCurrentUserReserved' : true})
       } else{
         // console.log('current user is NOT RESERVED')
-        return res.send({"isCurrentUserReserved" : false})
+        return res.send({'isCurrentUserReserved' : false})
       }
     })
   } else{
-    res.send({"message" : 'user is not logged in'})
+    res.send({'message' : 'user is not logged in'})
     next()
   }
 }
@@ -81,15 +81,15 @@ exports.UpdateGuestList = function(req, res, next){
           if(err) {console.error(err)}
           // console.log(doc)
           // res.send({"message": "added club in user list"})
-          return res.send({"message": "removed club in user list"})
+          return res.send({'message': 'removed club in user list'})
         })
       } else{
         console.log('add club in user list')
         User.findOneAndUpdate({email: userEmail}, {$push: {clubs: clubID}}, function(err, doc){
           if(err) {console.error(err)}
           // console.log(doc)
-          // res.send({"message": "added club in user list"})
-          return res.send({"message": "added club in user list"})
+          // res.send({'message': 'added club in user list'})
+          return res.send({'message': 'added club in user list'})
         })
       }
     })

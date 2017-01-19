@@ -10,10 +10,10 @@ exports.getGuestLists = function(req, res, next){
     //if clubID doesnt exist in database, it simply means
     //there is no one reserved at that club at the momemnt
     if(!existingClub || existingClub.guests.length === 0){
-      res.send({"guests": []})
+      res.send({'guests': []})
       // otherwise, send a JSON with all the guest lists
     } else{
-      res.send({"guests": existingClub.guests})
+      res.send({'guests': existingClub.guests})
     }
     // next()
   })

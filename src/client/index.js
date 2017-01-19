@@ -16,7 +16,7 @@ import Home from './containers/home';
 import { AUTH_USER , TAB_INDEX} from './actions/types'
 
 //This is for material-ui
-import injectTapEventPlugin from "react-tap-event-plugin";
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
