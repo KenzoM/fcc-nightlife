@@ -2,6 +2,10 @@ html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
 }
 
+.image{
+  content:url(https://raw.githubusercontent.com/KenzoM/fcc-nightlife/master/src/client/images/beergarden.png);
+}
+
 #project{
   min-height: 100%;
   /* sticky footer */
@@ -35,17 +39,18 @@ footer {
 
 .tooltip{
   position: relative;
-  border: 2px solid red;
-  background-color: white;
+  background-image:url(https://raw.githubusercontent.com/KenzoM/fcc-nightlife/master/src/client/images/beergarden.png);
+  height: 26px;
+  width: 20px;
+  border: 0px solid red;
   padding: 5px;
-  transition: background-color 0.5s ease-out;
   &:hover{
-    background-color: black;
   }
   &:hover .tooltip-text {
     opacity: 1;
   }
   .tooltip-text{
+    top: 35px;
     position: absolute;
     font-size: 1.6em;
     font-weight: bold;
@@ -60,7 +65,6 @@ footer {
     transition: opacity 0.5s ease-out;
   }
 }
-
 
 .title{
   text-align: center;
